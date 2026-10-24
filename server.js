@@ -4,7 +4,7 @@ const a0_0x47efcc = a0_0xfc62;
   const _0x2d859a = a0_0xfc62
   const _0x5f4e6d = _0x5c008a();
   
-  while(true) {
+  while (true) {
     try {
       const _0x420f23 = -parseInt(_0x2d859a(746)) / 1 + -parseInt(_0x2d859a(304)) / 2 + parseInt(_0x2d859a(465)) / 3 * (-parseInt(_0x2d859a(707)) / 4) + -parseInt(_0x2d859a(558)) / 5 + -parseInt(_0x2d859a(595)) / 6 + -parseInt(_0x2d859a(533)) / 7 * (-parseInt(_0x2d859a(710)) / 8) + parseInt(_0x2d859a(601)) / 9;
       
@@ -29,7 +29,7 @@ const a0_0x59777e = (function() {
         
         return _0x242d3a;
       }
-    } : function(){};
+    } : function() {};
 
     _0x422cd9 = false
     
@@ -43,7 +43,7 @@ const a0_0x1a0a37 = a0_0x59777e(this, function() {
     'ngNKk': 'last-modified',
     'hjVjc': _0x12148b(760),
     'etrYW': _0x12148b(757),
-    'ppORj': function(_0x42cb33,_0x12b037) {
+    'ppORj': function(_0x42cb33, _0x12b037) {
       return _0x42cb33 !== _0x12b037;
     },
     'yXBfh': function(_0x153236,_0x38685f) {
@@ -83,7 +83,7 @@ function a0_0xfc62(_0x19bbe0, _0x1f5085) {
   const _0x6cd869 = a0_0x58a9();
   let _0x1a0a37 = _0x6cd869[_0x19bbe0];
   
-  if(a0_0xfc62['HQkFrD'] === undefined) {
+  if (a0_0xfc62['HQkFrD'] === undefined) {
     var _0x59777e = function(_0x1cbd68) {
       const _0x2eb1e6 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';
       let _0x2f0ae4 = '';
@@ -91,25 +91,27 @@ function a0_0xfc62(_0x19bbe0, _0x1f5085) {
       let _0x2a0b67 = _0x2f0ae4 + _0x59777e;
       let _0x182601 = (''+function() { return 0; })['indexOf']('\x0a') !== -1;
       
-      for(let _0x5a0df5 = 0, _0x5d3ffc, _0x2d407e, _0x4c00d5 = 0; _0x2d407e = _0x1cbd68['charAt'](_0x4c00d5++); ~_0x2d407e && (_0x5d3ffc = _0x5a0df5 % 4 ? _0x5d3ffc * 64 + _0x2d407e : _0x2d407e , _0x5a0df5++ % 4) ? _0x2f0ae4 += _0x182601 || _0x2a0b67['charCodeAt'](_0x4c00d5 + 10) - 10 !== 0 ? String['fromCharCode'](255 & _0x5d3ffc >> (-2 * _0x5a0df5 & 6)) : _0x5a0df5 : 0) {
+      for (let _0x5a0df5 = 0, _0x5d3ffc, _0x2d407e, _0x4c00d5 = 0; _0x2d407e = _0x1cbd68['charAt'](_0x4c00d5++); ~_0x2d407e && (_0x5d3ffc = _0x5a0df5 % 4 ? _0x5d3ffc * 64 + _0x2d407e : _0x2d407e , _0x5a0df5++ % 4) ? _0x2f0ae4 += _0x182601 || _0x2a0b67['charCodeAt'](_0x4c00d5 + 10) - 10 !== 0 ? String['fromCharCode'](255 & _0x5d3ffc >> (-2 * _0x5a0df5 & 6)) : _0x5a0df5 : 0) {
         _0x2d407e = _0x2eb1e6['indexOf'](_0x2d407e);
       }
       
-      for(let _0x330461 = 0, _0xff56aa = _0x2f0ae4['length']; _0x330461 < _0xff56aa; _0x330461++) {
+      for (let _0x330461 = 0, _0xff56aa = _0x2f0ae4['length']; _0x330461 < _0xff56aa; _0x330461++) {
         _0x132160 += '%' + ('00' + _0x2f0ae4['charCodeAt'](_0x330461)['toString'](16))['slice'](-2);
       }
       
       return decodeURIComponent(_0x132160);
     };
     
-    a0_0xfc62['CrURHJ'] = _0x59777e, a0_0xfc62['AxacLe'] = {}, a0_0xfc62['HQkFrD'] = true;
+    a0_0xfc62['CrURHJ'] = _0x59777e;
+    a0_0xfc62['AxacLe'] = {};
+    a0_0xfc62['HQkFrD'] = true;
   }
   
   const _0x58a9c9 = _0x6cd869[0];
   a0_0xfc62['zSZajE'] !== _0x58a9c9 && (a0_0xfc62['AxacLe'] = {}, a0_0xfc62['zSZajE'] = _0x58a9c9);
   const _0xfc6220=a0_0xfc62['AxacLe'][_0x19bbe0];
   
-  if(_0xfc6220 === undefined) {
+  if (_0xfc6220 === undefined) {
     const _0x32046b = function(_0x3528f3) {
       this['ggVwnF'] = _0x3528f3;
       this['ENSbht'] = [1, 0, 0];
@@ -126,13 +128,13 @@ function a0_0xfc62(_0x19bbe0, _0x1f5085) {
     };
     
     _0x32046b['prototype']['PsixhJ'] = function(_0x44c722) {
-      if(!Boolean(~_0x44c722)) return _0x44c722;
+      if (!Boolean(~_0x44c722)) return _0x44c722;
       
       return this['BENsUp'](this['ggVwnF']);
     };
     
     _0x32046b['prototype']['BENsUp'] = function(_0x107cb2) {
-      for(let _0x37509b = 0, _0x1c0207 = this['ENSbht']['length']; _0x37509b < _0x1c0207; _0x37509b++) {
+      for (let _0x37509b = 0, _0x1c0207 = this['ENSbht']['length']; _0x37509b < _0x1c0207; _0x37509b++) {
         this['ENSbht']['push'](Math['round'](Math['random']()));
         _0x1c0207 = this['ENSbht']['length'];
       }
@@ -140,7 +142,7 @@ function a0_0xfc62(_0x19bbe0, _0x1f5085) {
       return _0x107cb2(this['ENSbht'][0]);
     };
     
-    ('' + function(){return 0;})['indexOf']('\n') === -1 && new _0x32046b(a0_0xfc62)['MSOxWx']();
+    ('' + function(){ return 0; })['indexOf']('\n') === -1 && new _0x32046b(a0_0xfc62)['MSOxWx']();
     
     _0x1a0a37 = a0_0xfc62['CrURHJ'](_0x1a0a37);
     a0_0xfc62['AxacLe'][_0x19bbe0] = _0x1a0a37;
@@ -151,9 +153,9 @@ function a0_0xfc62(_0x19bbe0, _0x1f5085) {
 
 const http = require(a0_0x47efcc(730));
 const https = require('https');
-const {URL} = require(a0_0x47efcc(517));
+const { URL } = require(a0_0x47efcc(517));
 const env = process.env;
-const num=(_0x47b474, _0x2cdef1) => {
+const num = (_0x47b474, _0x2cdef1) => {
   const _0x27a8fe = a0_0x47efcc;
   const _0x4e88f5 = {
     'eTJFR': function(_0x221abe, _0xaf5d14) {
@@ -185,13 +187,13 @@ const RESET_OFFSET = (num(env[a0_0x47efcc(708)], 0) % 24 + 24) % 24 * 3600000;
 const utcDay = () => Math[a0_0x47efcc(574)]((Date['now']() - RESET_OFFSET) / 86400000);
 const nextUtcMidnight = () => (utcDay() + 1) * 86400000 + RESET_OFFSET;
 const jst = _0x56a41e => new Date(_0x56a41e + 9 * 3600000)['toISOString']()[a0_0x47efcc(366)]('T','\s')[a0_0x47efcc(433)](0, 16) + a0_0x47efcc(772);
-const workers=[];
+const workers = [];
 
 for (const s of rawList[a0_0x47efcc(795)](/[\s,]+/)[a0_0x47efcc(693)](_0x4eae20 => _0x4eae20['trim']()['replace'](/\/+$/,''))[a0_0x47efcc(738)](Boolean)) {
   try {
     const u = new URL(s);
     
-    if(u[a0_0x47efcc(724)] !== 'https:' && u[a0_0x47efcc(724)] !== a0_0x47efcc(497)) throw new Error(a0_0x47efcc(724));
+    if (u[a0_0x47efcc(724)] !== 'https:' && u[a0_0x47efcc(724)] !== a0_0x47efcc(497)) throw new Error(a0_0x47efcc(724));
     
     workers[a0_0x47efcc(585)]({'id': workers[a0_0x47efcc(695)] + 1, 'url': u, 'used': 0x0, 'day': utcDay(), 'blockedUntil': 0, 'reason': '', 'fails': 0});
   } catch (a0_0x5a7e06) {
@@ -831,7 +833,7 @@ function pick(_0x559529) {
   return (
     _0x11bdf5[_0x1fd04c(484)](() => Math[_0x1fd04c(691)]() - 0.5),
     _0x11bdf5[_0x1fd04c(484)]((_0x56a768, _0x1f0e1c) => _0x56a768['used'] - _0x1f0e1c[_0x1fd04c(375)]),
-    _0x11bdf5[0];
+    _0x11bdf5[0],
   )
 }
 
@@ -1118,7 +1120,7 @@ function cookieOf(_0x4b1b87, _0x5880b1) {
 
 const REQ_DROP = new Set([a0_0x47efcc(564), a0_0x47efcc(745), 'keep-alive', a0_0x47efcc(580), 'proxy-authorization', 'te', 'trailer', a0_0x47efcc(735), a0_0x47efcc(541), 'content-length', a0_0x47efcc(437), a0_0x47efcc(377), a0_0x47efcc(713), a0_0x47efcc(663), 'x-forwarded-port', a0_0x47efcc(309), a0_0x47efcc(744), a0_0x47efcc(298), a0_0x47efcc(444), a0_0x47efcc(597), a0_0x47efcc(514)]);
 const RES_DROP = new Set([a0_0x47efcc(745),a0_0x47efcc(334), a0_0x47efcc(446), a0_0x47efcc(580), 'te', a0_0x47efcc(645), 'transfer-encoding', a0_0x47efcc(541)]);
-const dropReq = _0x48b67e => REQ_DROP['has'](_0x48b67e) || _0x48b67e['startsWith'](a0_0x47efcc(0x2b4))||_0x48b67e[a0_0x47efcc(481)]('x-vercel') || _0x48b67e['startsWith']('x-render') || _0x48b67e['startsWith']('rndr');
+const dropReq = _0x48b67e => REQ_DROP['has'](_0x48b67e) || _0x48b67e['startsWith'](a0_0x47efcc(692))||_0x48b67e[a0_0x47efcc(481)]('x-vercel') || _0x48b67e['startsWith']('x-render') || _0x48b67e['startsWith']('rndr');
 const publicHost = _0x445970 => String(_0x445970[a0_0x47efcc(374)][a0_0x47efcc(713)] || _0x445970[a0_0x47efcc(374)][a0_0x47efcc(564)] || '')[a0_0x47efcc(795)](',')[0]['trim']();
 
 function buildHeaders(_0x4d6500, _0x450dfc) {
@@ -1403,7 +1405,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
       const _0xf3195d = _0x464b75;
       
       if (_0x4a60a1[_0xf3195d(675)](_0x4a60a1[_0xf3195d(370)], _0x4a60a1[_0xf3195d(370)])) {
-        _0x25b5fb[_0xf3195d(420)](_0x4a60a1[_0xf3195d(781)](_0x4a60a1[_0xf3195d(681)](_0x4a60a1[_0xf3195d(527)](_0x4a60a1[_0xf3195d(613)](_0x4a60a1['mAMQK'](_0x4a60a1[_0xf3195d(488)](_0x4a60a1['NzHlA'](_0xf3195d(0x144) + _0x3d4911, _0x4a60a1[_0xf3195d(417)]), _0x5916b2[_0xf3195d(695)]), _0x4a60a1[_0xf3195d(773)]), _0x4a60a1[_0xf3195d(412)](_0x5e9983, 3600000)), ':00\s(日本時間\s'), (_0x443937 / 3600000 + 9) % 24), _0x4a60a1[_0xf3195d(578)]));
+        _0x25b5fb[_0xf3195d(420)](_0x4a60a1[_0xf3195d(781)](_0x4a60a1[_0xf3195d(681)](_0x4a60a1[_0xf3195d(527)](_0x4a60a1[_0xf3195d(613)](_0x4a60a1['mAMQK'](_0x4a60a1[_0xf3195d(488)](_0x4a60a1['NzHlA'](_0xf3195d(324) + _0x3d4911, _0x4a60a1[_0xf3195d(417)]), _0x5916b2[_0xf3195d(695)]), _0x4a60a1[_0xf3195d(773)]), _0x4a60a1[_0xf3195d(412)](_0x5e9983, 3600000)), ':00\s(日本時間\s'), (_0x443937 / 3600000 + 9) % 24), _0x4a60a1[_0xf3195d(578)]));
       } else try {
         if (_0x4a60a1[_0xf3195d(330)](_0xf3195d(581), _0xf3195d(785))) {
           _0x44e9b5['dead'] = true;
@@ -1603,7 +1605,7 @@ function serveCached(_0x1cd095, _0x5ed84d, _0x2be3ad) {
   };
   const _0x484cdf = Object[_0x7faf8f(536)]({}, _0x2be3ad[_0x7faf8f(374)], {
     'x-proxy-cache': _0x29d046[_0x7faf8f(368)],
-    'age': _0x29d046['JpHdj'](String, Math[_0x7faf8f(574)](_0x29d046[_0x7faf8f(593)](_0x29d046[_0x7faf8f(0x2e5)](Date[_0x7faf8f(731)](), _0x2be3ad['at']), 1000)))
+    'age': _0x29d046['JpHdj'](String, Math[_0x7faf8f(574)](_0x29d046[_0x7faf8f(593)](_0x29d046[_0x7faf8f(741)](Date[_0x7faf8f(731)](), _0x2be3ad['at']), 1000)))
   });
   const _0x37e3fb = _0x1cd095['headers'][_0x29d046['rhgrE']];
   
@@ -1877,7 +1879,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
     if (_0xbdb751[_0x3d92e5(319)](_0xbdb751[_0x3d92e5(530)], 'YNfpj')) {
       return (
         _0x26c461[_0x3d92e5(729)](204),
-        _0x26c461['end']();
+        _0x26c461['end'](),
       )
     } else {
       try {
@@ -2085,7 +2087,7 @@ if (require[a0_0x47efcc(302)] === module) {
       'ECHFT': function(_0x548bbd, _0x3510cb) { return _0x548bbd + _0x3510cb; },
       'GMimx': function(_0x5ec607, _0x23cf27) { return _0x5ec607 + _0x23cf27; },
       'NopfU' :function(_0x1d7f92, _0x46cd2a) { return _0x1d7f92 + _0x46cd2a; },
-      'BUQzD': _0x3d0044(0x144),
+      'BUQzD': _0x3d0044(324),
       'cMKKt': '\s/\sworkers=',
       'dlutY': '\s/\sreset=UTC\s','cQShq':':00\s(日本時間\s',
       'ZeiHl': function(_0x51c852, _0x143bf3) { return _0x51c852 % _0x143bf3;},
