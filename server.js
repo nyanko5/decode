@@ -1756,7 +1756,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
     'KDwfU': 'workererr',
     'sXWOf': function(_0x193f4e, _0x28067f) { return _0x193f4e + _0x28067f; },
     'BuARm': function(_0x3dc911, _0x2af398) { return _0x3dc911 > _0x2af398; },
-    'vrjjk': function(_0x17dfbc, _0x501c08) { return _0x17dfbc === _0x501c08; },]
+    'vrjjk': function(_0x17dfbc, _0x501c08) { return _0x17dfbc === _0x501c08; },
     'hPjpt': _0x3d92e5(483),
     'kkZNO': function(_0x45defb, _0x5a28f8, _0x15caa3, _0x39c705) { return _0x45defb(_0x5a28f8, _0x15caa3, _0x39c705); },
     'FVPEZ': function(_0x4bae0f, _0x102e82) { return _0x4bae0f === _0x102e82; },
