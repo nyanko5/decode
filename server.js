@@ -1870,7 +1870,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
       'content-length': _0xbdb751[_0x3d92e5(511)](String, _0x55772c[_0x3d92e5(695)]),
       'cache-control': _0x3d92e5(459)
     }),
-      _0x26c461[_0x3d92e5(604)](_0x55772c),
+      _0x26c461[_0x3d92e5(604)](_0x55772c)
     )
   }
   
