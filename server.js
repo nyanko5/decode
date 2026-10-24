@@ -833,8 +833,8 @@ function pick(_0x559529) {
   return (
     _0x11bdf5[_0x1fd04c(484)](() => Math[_0x1fd04c(691)]() - 0.5),
     _0x11bdf5[_0x1fd04c(484)]((_0x56a768, _0x1f0e1c) => _0x56a768['used'] - _0x1f0e1c[_0x1fd04c(375)]),
-    _0x11bdf5[0],
-  )
+    _0x11bdf5[0]
+  );
 }
 
 function soonestRetrySec() {
@@ -925,7 +925,7 @@ async function rest(_0x1354b4) {
       
       return (
         _0x4111fd[_0x154951(552)](clearTimeout, _0x10eaea),
-        await _0x131c34[_0x154951(458)](),
+        await _0x131c34[_0x154951(458)]()
       )
     }
   } catch (_0x29bbda) {
@@ -1051,7 +1051,7 @@ function cacheGet(_0x254554) {
   if (_0x5336d0[_0x246e65(782)] < Date[_0x246e65(731)]()) return (
     cache['delete'](_0x254554),
     cacheBytes -= _0x5336d0['size'],
-    null,
+    null
   );
   
   return (
@@ -1879,7 +1879,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
     if (_0xbdb751[_0x3d92e5(319)](_0xbdb751[_0x3d92e5(530)], 'YNfpj')) {
       return (
         _0x26c461[_0x3d92e5(729)](204),
-        _0x26c461['end'](),
+        _0x26c461['end']()
       )
     } else {
       try {
@@ -1902,7 +1902,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
     if (_0x122e20) {
       return (
         cacheHits++,
-        _0xbdb751['kkZNO'](serveCached, _0x3ceaeb, _0x26c461, _0x122e20),
+        _0xbdb751['kkZNO'](serveCached, _0x3ceaeb, _0x26c461, _0x122e20)
       )
     }
     
@@ -2058,7 +2058,7 @@ const requestListener = (_0x2c62ec, _0x597c3c) => {
       else return (
         _0x529421['delete'](_0x2092e5),
         _0x3ea322 -= _0x49bf43[_0x472444(305)],
-        null;
+        null
       )
     } catch (_0x38f7d2) {}
   });
