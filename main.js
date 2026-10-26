@@ -9,7 +9,7 @@ export function a0_0xfc62(_0x19bbe0) {
       let _0x2f0ae4 = '';
       let _0x132160 = '';
       let _0x2a0b67 = _0x2f0ae4 + _0x59777e;
-      let _0x182601 = (''+function() { return 0; })['indexOf']('\x0a') !== -1;
+      let _0x182601 = ('' + function() { return 0; })['indexOf']('\x0a') !== -1;
       
       for (let _0x5a0df5 = 0, _0x5d3ffc, _0x2d407e, _0x4c00d5 = 0; _0x2d407e = _0x1cbd68['charAt'](_0x4c00d5++); ~_0x2d407e && (_0x5d3ffc = _0x5a0df5 % 4 ? _0x5d3ffc * 64 + _0x2d407e : _0x2d407e , _0x5a0df5++ % 4) ? _0x2f0ae4 += _0x182601 || _0x2a0b67['charCodeAt'](_0x4c00d5 + 10) - 10 !== 0 ? String['fromCharCode'](255 & _0x5d3ffc >> (-2 * _0x5a0df5 & 6)) : _0x5a0df5 : 0) {
         _0x2d407e = _0x2eb1e6['indexOf'](_0x2d407e);
@@ -29,7 +29,7 @@ export function a0_0xfc62(_0x19bbe0) {
   
   const _0x58a9c9 = _0x6cd869[0];
   a0_0xfc62['zSZajE'] !== _0x58a9c9 && (a0_0xfc62['AxacLe'] = {}, a0_0xfc62['zSZajE'] = _0x58a9c9);
-  const _0xfc6220=a0_0xfc62['AxacLe'][_0x19bbe0];
+  const _0xfc6220 = a0_0xfc62['AxacLe'][_0x19bbe0];
   
   if (_0xfc6220 === undefined) {
     const _0x32046b = function(_0x3528f3) {
@@ -582,8 +582,6 @@ export function a0_0x58a9()　{
     'qxrWzeu',
     'CMvZDw1L'
   ];
-  
-  a0_0x58a9 = function() { return _0x562184; };
-  
-  return a0_0x58a9();
+    
+  return _0x562184;
 }
