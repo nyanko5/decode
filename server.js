@@ -2,7 +2,7 @@ import { a0_0xfc62, a0_0x58a9 } from "./main.js";
 
 const a0_0x47efcc = a0_0xfc62;
 
-(function(_0x5c008a, _0x20c340) {
+(function(_0x5c008a) {
   const _0x2d859a = a0_0xfc62
   const _0x5f4e6d = _0x5c008a();
   
@@ -10,14 +10,14 @@ const a0_0x47efcc = a0_0xfc62;
     try {
       const _0x420f23 = -parseInt(_0x2d859a(746)) / 1 + -parseInt(_0x2d859a(304)) / 2 + parseInt(_0x2d859a(465)) / 3 * (-parseInt(_0x2d859a(707)) / 4) + -parseInt(_0x2d859a(558)) / 5 + -parseInt(_0x2d859a(595)) / 6 + -parseInt(_0x2d859a(533)) / 7 * (-parseInt(_0x2d859a(710)) / 8) + parseInt(_0x2d859a(601)) / 9;
       
-      if (_0x420f23 === _0x20c340) break;
+      if (_0x420f23 === 781519) break;
       else _0x5f4e6d['push'](_0x5f4e6d['shift']());
       
     } catch (_0x4db65b) {
       _0x5f4e6d['push'](_0x5f4e6d['shift']());
     }
   }
-}(a0_0x58a9, 781519));
+}(a0_0x58a9));
 
 const a0_0x59777e = (function() {
   let _0x422cd9 = true;
