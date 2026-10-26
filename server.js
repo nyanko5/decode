@@ -1,4 +1,4 @@
-import { a0_0xfc62 } from "./main.js";
+import { a0_0xfc62, a0_0x58a9 } from "./main.js";
 
 const a0_0x47efcc = a0_0xfc62;
 
