@@ -28,7 +28,12 @@ export function a0_0xfc62(_0x19bbe0) {
   }
   
   const _0x58a9c9 = _0x6cd869[0];
-  a0_0xfc62['zSZajE'] !== _0x58a9c9 && (a0_0xfc62['AxacLe'] = {}, a0_0xfc62['zSZajE'] = _0x58a9c9);
+  
+  if (a0_0xfc62['zSZajE'] !== _0x58a9c9) {
+    a0_0xfc62['AxacLe'] = {};
+    a0_0xfc62['zSZajE'] = _0x58a9c9;
+  }
+  
   const _0xfc6220 = a0_0xfc62['AxacLe'][_0x19bbe0];
   
   if (_0xfc6220 === undefined) {
