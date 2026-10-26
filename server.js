@@ -86,7 +86,6 @@ const num = (_0x47b474, _0x2cdef1) => {
   const _0x27a8fe = a0_0x47efcc;
   const _0x4e88f5 = {
     'eTJFR': _0x221abe !== _0xaf5d14
-    }
   };
   
   const _0x5cff89 = Number(_0x47b474);
