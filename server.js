@@ -2,23 +2,6 @@ import { main, returnArrayStrings } from "./main.js";
 
 const a0_0x47efcc = main;
 
-(function() {
-  const _0x2d859a = main
-  const arrayString = returnArrayStrings();
-  
-  while (true) {
-    try {
-      const _0x420f23 = -parseInt(_0x2d859a(746)) / 1 + -parseInt(_0x2d859a(304)) / 2 + parseInt(_0x2d859a(465)) / 3 * (-parseInt(_0x2d859a(707)) / 4) + -parseInt(_0x2d859a(558)) / 5 + -parseInt(_0x2d859a(595)) / 6 + -parseInt(_0x2d859a(533)) / 7 * (-parseInt(_0x2d859a(710)) / 8) + parseInt(_0x2d859a(601)) / 9;
-      
-      if (_0x420f23 === 781519) break;
-      else arrayString.push(arrayString.shift());
-      
-    } catch (_0x4db65b) {
-      arrayString.push(arrayString.shift());
-    }
-  }
-}());
-
 const a0_0x59777e = (function() {
   let _0x422cd9 = true;
   
