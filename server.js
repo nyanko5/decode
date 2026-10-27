@@ -3,8 +3,7 @@ const a0_0x59777e = (function() {
   
   return function(_0x53351b, _0x2657d3) {
     const _0x30d177 = _0x422cd9 ? function(){
-      const _0x2298d5 = main;
-      if(_0x2657d3) {
+      if (_0x2657d3) {
         const _0x242d3a = _0x2657d3.apply(_0x53351b, arguments);
         _0x2657d3 = null
         
@@ -19,7 +18,6 @@ const a0_0x59777e = (function() {
 }())
 
 const a0_0x1a0a37 = a0_0x59777e(this, function() {
-  const _0x12148b = main;
   const _0x2f5c80 = {
     'ngNKk': 'last-modified',
     'hjVjc': 'HIT',
@@ -591,9 +589,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
   
   return new Promise(_0x1b4755 => {
     const _0x4a60a1 = {
-      'fAXzq': function(_0x38d6f7, _0x145da4, _0x559c3b) {
-        const _0x20ce31 = main;
-        
+      'fAXzq': function(_0x38d6f7, _0x145da4, _0x559c3b) {        
         return _0xd48df5.AtpdE(_0x38d6f7, _0x145da4, _0x559c3b);
       },
       'pzPmY': _0xd48df5.nwoDP,
@@ -653,9 +649,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
     let _0xb53ec0 = null;
     const _0x13ef3e = _0xfe12af => {
       const _0x115577 = {
-        'VhtLw': function(_0x8a4aa3, _0x37aef8) {
-          const _0x22a3bf = main;
-          
+        'VhtLw': function(_0x8a4aa3, _0x37aef8) {          
           return _0xd48df5.pyzNe(_0x8a4aa3, _0x37aef8);
         }
       };
