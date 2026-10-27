@@ -1275,46 +1275,44 @@ async function handle(_0x3ceaeb, _0x26c461) {
     }
     
     await _0xbdb751.RcsNk(syncShared);
-
-    // ここ
     
     const _0x2003fb = Date.now();
     const _0x2410f4 = {
-      'note': _0x3d92e5(410),
-      'time': new Date()[_0x3d92e5(411)](),
-      'timeJST': _0xbdb751[_0x3d92e5(511)](jst, Date['now']()),
-      'sharedState': REDIS_URL ? _0x3d92e5(743) : _0xbdb751[_0x3d92e5(661)],
-      'workers': workers[_0x3d92e5(693)](_0x23e62a => ({
+      'note': 'このインスタンスから見た状態です（Vercel はインスタンスが複数あります）',
+      'time': new Date().toISOString(),
+      'timeJST': _0xbdb751.iaUNm(jst, Date.now()),
+      'sharedState': REDIS_URL ? 'redis' : _0xbdb751.mbLdi,
+      'workers': workers.map(_0x23e62a => ({
         'id': _0x23e62a.id,
-        'host': _0x23e62a.url.host[_0x3d92e5(366)](/^(.{4}).*(.{12})$/, _0x3d92e5(584)),
-        'usedOnThisInstance': _0x23e62a['used'],
-        'state': _0x23e62a.blockedUntil > _0x2003fb ? _0x3d92e5(563) + _0x23e62a.reason + ')' : 'ok',
-        'blockedUntil': _0x23e62a.blockedUntil > _0x2003fb ? new Date(_0x23e62a.blockedUntil)['toISOString']() : null,
-        'blockedUntilJST': _0x23e62a['blockedUntil'] > _0x2003fb ? jst(_0x23e62a.blockedUntil) : null,
+        'host': _0x23e62a.url.host.replace(/^(.{4}).*(.{12})$/, '$1…$2'),
+        'usedOnThisInstance': _0x23e62a.used,
+        'state': _0x23e62a.blockedUntil > _0x2003fb ? 'blocked(' + _0x23e62a.reason + ')' : 'ok',
+        'blockedUntil': _0x23e62a.blockedUntil > _0x2003fb ? new Date(_0x23e62a.blockedUntil).toISOString() : null,
+        'blockedUntilJST': _0x23e62a.blockedUntil > _0x2003fb ? jst(_0x23e62a.blockedUntil) : null,
         'consecutiveFails' : _0x23e62a.fails
       })),
       'cache': {
         'items': cache.size,
-        'mb': +_0xbdb751['rzPwz'](cacheBytes, 1048576)[_0x3d92e5(439)](1),
+        'mb': +_0xbdb751.rzPwz(cacheBytes, 1048576).toFixed(1),
         'hits': cacheHits,
         'misses': cacheMiss
       }
     };
-    const _0x55772c = Buffer.from(JSON[_0x3d92e5(654)](_0x2410f4, null, 2));
+    const _0x55772c = Buffer.from(JSON.stringify(_0x2410f4, null, 2));
     
     return (
-      _0x26c461['writeHead'](200, {
-      'content-type': _0xbdb751[_0x3d92e5(727)],
-      'content-length': _0xbdb751[_0x3d92e5(511)](String, _0x55772c.length),
+      _0x26c461.writeHead(200, {
+      'content-type': _0xbdb751.igMym,
+      'content-length': _0xbdb751.iaUNm(String, _0x55772c.length),
       'cache-control': 'no-store'
     }),
       _0x26c461.end(_0x55772c)
     )
   }
   
-  if (_0x24411b[0] !== '/') return _0xbdb751[_0x3d92e5(615)](sendText, _0x26c461, 400, _0xbdb751['YfWGj']);
-  if (_0xbdb751['stMOZ'](_0x24411b, _0xbdb751[_0x3d92e5(633)]) && _0xbdb751[_0x3d92e5(432)](_0xbdb751[_0x3d92e5(511)](String, env[_0x3d92e5(535)])['toLowerCase'](), _0xbdb751[_0x3d92e5(790)])) {
-    if (_0xbdb751.FVPEZ(_0xbdb751[_0x3d92e5(530)], 'YNfpj')) {
+  if (_0x24411b[0] !== '/') return _0xbdb751.bXWUr(sendText, _0x26c461, 400, _0xbdb751.YfWGj);
+  if (_0xbdb751.stMOZ(_0x24411b, _0xbdb751.lLrdr) && _0xbdb751.SJJmb(_0xbdb751.iaUNm(String, env.FAVICON).toLowerCase(), _0xbdb751.HdjNo)) {
+    if (_0xbdb751.FVPEZ(_0xbdb751.kuXdA, 'YNfpj')) {
       return (
         _0x26c461.writeHead(204),
         _0x26c461.end()
@@ -1328,38 +1326,38 @@ async function handle(_0x3ceaeb, _0x26c461) {
     }
   }
   
-  if (!workers.length) return _0xbdb751[_0x3d92e5(414)](sendText, _0x26c461, 500, _0x3d92e5(765));
+  if (!workers.length) return _0xbdb751.kkZNO(sendText, _0x26c461, 500, 'No worker configured');
   
-  const _0x41951a = /^(GET|HEAD|OPTIONS)$/['test'](_0x3ceaeb.method);
+  const _0x41951a = /^(GET|HEAD|OPTIONS)$/.test(_0x3ceaeb.method);
   let _0x56dcfa = null;
   
-  if (CACHE_ON && _0xbdb751.FSTDi(_0x3ceaeb.method, _0xbdb751['wCFws']) && !_0x3ceaeb.headers['range'] && !_0x3ceaeb['headers']['authorization']) {
-    _0x56dcfa = _0xbdb751[_0x3d92e5(438)](_0xbdb751['qLUlO'](_0xbdb751[_0x3d92e5(728)](_0xbdb751[_0x3d92e5(438)](_0xbdb751[_0x3d92e5(511)](publicHost, _0x3ceaeb), '|'), _0xbdb751.EIebK(cookieOf, _0x3ceaeb.headers[_0x3d92e5(507)], _0xbdb751[_0x3d92e5(504)])), '|') + (_0x3ceaeb.headers[_0xbdb751['iSmCB']] || ''), '|') + _0x24411b;
+  if (CACHE_ON && _0xbdb751.FSTDi(_0x3ceaeb.method, _0xbdb751.wCFws) && !_0x3ceaeb.headers.range && !_0x3ceaeb.headers.authorization) {
+    _0x56dcfa = _0xbdb751.sXWOf(_0xbdb751.qLUlO(_0xbdb751.GwQMM(_0xbdb751.sXWOf(_0xbdb751.iaUNm(publicHost, _0x3ceaeb), '|'), _0xbdb751.EIebK(cookieOf, _0x3ceaeb.headers.cookie, _0xbdb751.DUKcb)), '|') + (_0x3ceaeb.headers[_0xbdb751.iSmCB] || ''), '|') + _0x24411b;
     const _0x122e20 = cacheGet(_0x56dcfa);
     
     if (_0x122e20) {
       return (
         cacheHits++,
-        _0xbdb751['kkZNO'](serveCached, _0x3ceaeb, _0x26c461, _0x122e20)
+        _0xbdb751.kkZNO(serveCached, _0x3ceaeb, _0x26c461, _0x122e20)
       )
     }
     
     cacheMiss++;
   }
   
-  let _0x5cbec1 = Buffer[_0x3d92e5(293)](0);
+  let _0x5cbec1 = Buffer.alloc(0);
   
-  if (!_0x41951a || _0x3ceaeb.method === _0xbdb751[_0x3d92e5(430)]) {
-    if (_0xbdb751['SJJmb'](_0xbdb751[_0x3d92e5(342)], _0xbdb751[_0x3d92e5(649)])) try {
-      _0x5cbec1 = await _0xbdb751[_0x3d92e5(553)](readBody, _0x3ceaeb, MAX_BODY);
+  if (!_0x41951a || _0x3ceaeb.method === _0xbdb751.zQijO) {
+    if (_0xbdb751.SJJmb(_0xbdb751.kEgjT, _0xbdb751.eAYDW)) try {
+      _0x5cbec1 = await _0xbdb751.hGeIp(readBody, _0x3ceaeb, MAX_BODY);
     } catch (_0x25b493) {
-      if (_0xbdb751['SDqmY'] !== _0xbdb751[_0x3d92e5(635)]) {
-        if (!_0x2bf0ac[_0x3d92e5(725)]) {
-          _0x269dd3[_0x3d92e5(636)] = true;
+      if (_0xbdb751.SDqmY !== _0xbdb751.SDqmY) {
+        if (!_0x2bf0ac.writableEnded) {
+          _0x269dd3.dead = true;
           
-          if (_0x404c67.cancel) _0x28c4d4['cancel']();
+          if (_0x404c67.cancel) _0x28c4d4.cancel();
         }
-      } else return _0xbdb751[_0x3d92e5(414)](sendText, _0x26c461, _0x25b493['code'] === _0xbdb751['wgDtN'] ? 413 : 400, _0x25b493.code === _0xbdb751['wgDtN'] ? _0xbdb751['XyfZH'] : _0xbdb751[_0x3d92e5(401)]);
+      } else return _0xbdb751.kkZNO(sendText, _0x26c461, _0x25b493.code === _0xbdb751.wgDtN ? 413 : 400, _0x25b493.code === _0xbdb751.wgDtN ? _0xbdb751.XyfZH : _0xbdb751.YfWGj);
     } else {
       if (_0x5e844c.upRes) {
         _0xd23ff5.upRes.destroy();
@@ -1372,23 +1370,25 @@ async function handle(_0x3ceaeb, _0x26c461) {
   const _0x1195a8 = {
     'method': _0x3ceaeb.method,
     'path': _0x24411b,
-    'headers': _0xbdb751[_0x3d92e5(553)](buildHeaders, _0x3ceaeb, _0x5cbec1.length),
+    'headers': _0xbdb751.hGeIp(buildHeaders, _0x3ceaeb, _0x5cbec1.length),
     'body': _0x5cbec1,
     'cancel': null,
     'dead': false
   };
   
-  _0x26c461['on']('close', () => {
+  _0x26c461.on('close', () => {
     const _0x250a4f = _0x3d92e5;
     
-    if (!_0x26c461['writableEnded']) {
-      _0x1195a8[_0x250a4f(636)] = true;
+    if (!_0x26c461.writableEnded) {
+      _0x1195a8.dead = true;
       
-      if (_0x1195a8.cancel) _0x1195a8['cancel']();
+      if (_0x1195a8.cancel) _0x1195a8.cancel();
     }
   });
   
-  await _0xbdb751['RcsNk'](syncShared);
+  await _0xbdb751.RcsNk(syncShared);
+
+  // ここ
   
   const _0x16678a = new Set();
   let _0x761e44 = null;
@@ -1396,7 +1396,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
   for (let _0x5dec01 = 0; _0x5dec01 < MAX_ATTEMPTS; _0x5dec01++) {
     if (_0xbdb751[_0x3d92e5(308)]('cyCfP', _0xbdb751[_0x3d92e5(348)])) _0x5da628.destroy();
     else {
-      if (_0x1195a8[_0x3d92e5(636)]) return;
+      if (_0x1195a8.dead) return;
       
       const _0x39fcba = _0xbdb751[_0x3d92e5(314)](pick, _0x16678a);
       
@@ -1407,7 +1407,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
       
       const _0x5af209 = await attempt(_0x39fcba, _0x1195a8);
       
-      if (_0x1195a8[_0x3d92e5(636)]) {
+      if (_0x1195a8.dead) {
         if (_0xbdb751[_0x3d92e5(419)](_0x3d92e5(359), _0xbdb751[_0x3d92e5(492)])) {
           if (!_0x44fc8e[_0x3d92e5(382)](_0x3538ac)) return null;
           
@@ -1457,7 +1457,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
           const _0x1e56e3 = _0x5df31f['get'](_0x122e77);
           
           _0x1e56e3 && (_0x5e5c78 -= _0x1e56e3.size, _0xf921e3['delete'](_0xc69fcf));
-          _0x334853.size = lygiDv[_0x3d92e5(438)](_0x12fa25.body.length, 1024);
+          _0x334853.size = lygiDv.sXWOf(_0x12fa25.body.length, 1024);
           _0x33b945['set'](_0x3e6de7, _0x7c0b9b);
           _0x31590b += _0x470435.size;
           
