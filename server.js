@@ -1387,35 +1387,33 @@ async function handle(_0x3ceaeb, _0x26c461) {
   });
   
   await _0xbdb751.RcsNk(syncShared);
-
-  // ここ
   
   const _0x16678a = new Set();
   let _0x761e44 = null;
   
   for (let _0x5dec01 = 0; _0x5dec01 < MAX_ATTEMPTS; _0x5dec01++) {
-    if (_0xbdb751[_0x3d92e5(308)]('cyCfP', _0xbdb751[_0x3d92e5(348)])) _0x5da628.destroy();
+    if (_0xbdb751.nCiIE('cyCfP', _0xbdb751.zsOvW)) _0x5da628.destroy();
     else {
       if (_0x1195a8.dead) return;
       
-      const _0x39fcba = _0xbdb751[_0x3d92e5(314)](pick, _0x16678a);
+      const _0x39fcba = _0xbdb751.AObef(pick, _0x16678a);
       
       if (!_0x39fcba) break;
       
-      _0x16678a[_0x3d92e5(413)](_0x39fcba['id']);
+      _0x16678a.add(_0x39fcba.id);
       _0x39fcba.used++;
       
       const _0x5af209 = await attempt(_0x39fcba, _0x1195a8);
       
       if (_0x1195a8.dead) {
-        if (_0xbdb751[_0x3d92e5(419)](_0x3d92e5(359), _0xbdb751[_0x3d92e5(492)])) {
-          if (!_0x44fc8e[_0x3d92e5(382)](_0x3538ac)) return null;
+        if (_0xbdb751.WZkLW('cTXaL', _0xbdb751.CDXUc)) {
+          if (!_0x44fc8e.has(_0x3538ac)) return null;
           
           const _0x348efd = _0x3ae1e7.toString('utf8', 0, 4096);
           
-          if (_0x2b5ba7.test(_0x348efd)) return lygiDv['QCrUv'];
-          if (_0x3d949d.test(_0x348efd)) return lygiDv[_0x3d92e5(550)];
-          if (_0x12f3a7.test(_0x348efd)) return lygiDv['KDwfU'];
+          if (_0x2b5ba7.test(_0x348efd)) return lygiDv.QCrUv;
+          if (_0x3d949d.test(_0x348efd)) return lygiDv.ZUyvb;
+          if (_0x12f3a7.test(_0x348efd)) return lygiDv.KDwfU;
           
           return null;
         } else {
@@ -1428,57 +1426,58 @@ async function handle(_0x3ceaeb, _0x26c461) {
       }
       
       if (_0x5af209.error) {
-        if (_0x3d92e5(519) !== _0xbdb751[_0x3d92e5(470)]) {
-          _0xbdb751['qsGHN'](markFail, _0x39fcba, _0x5af209.error);
+        if ('sdkXJ' !== _0xbdb751.yRFDj) {
+          _0xbdb751.qsGHN(markFail, _0x39fcba, _0x5af209.error);
           
-          if (_0x41951a || SAFE_ERR[_0x3d92e5(382)](_0x5af209.error)) continue;
+          if (_0x41951a || SAFE_ERR.has(_0x5af209.error)) continue;
           
-          return _0xbdb751[_0x3d92e5(347)](sendText, _0x26c461, 502, _0xbdb751[_0x3d92e5(590)]);
+          return _0xbdb751.PUPuV(sendText, _0x26c461, 502, _0xbdb751.gBkLX);
         } else return (
-          _0x414054['writeHead'](204),
-          _0x25b84f['end']()
+          _0x414054.writeHead(204),
+          _0x25b84f.end()
         )
-      } if (_0x5af209[_0x3d92e5(594)] === _0xbdb751[_0x3d92e5(774)] || _0xbdb751[_0x3d92e5(538)](_0x5af209[_0x3d92e5(594)], _0x3d92e5(559))) {
-        await _0xbdb751['EIebK'](applyKind, _0x39fcba, _0x5af209[_0x3d92e5(594)]);
+      }
+      if (_0x5af209.kind === _0xbdb751.QCrUv || _0xbdb751.PnhWc(_0x5af209.kind, 'rate')) {
+        await _0xbdb751.EIebK(applyKind, _0x39fcba, _0x5af209.kind);
         
         continue;
       }
       
-      if (_0xbdb751.vrjjk(_0x5af209[_0x3d92e5(594)], _0xbdb751['KDwfU'])) {
-        if (_0xbdb751[_0x3d92e5(308)](_0x3d92e5(474), _0xbdb751[_0x3d92e5(472)])) {
-          await _0xbdb751[_0x3d92e5(787)](applyKind, _0x39fcba, _0x5af209['kind']);
+      if (_0xbdb751.vrjjk(_0x5af209.kind, _0xbdb751.KDwfU)) {
+        if (_0xbdb751.nCiIE('EmGIX', _0xbdb751.NWrnO)) {
+          await _0xbdb751.BvNtV(applyKind, _0x39fcba, _0x5af209.kind);
           
           _0x761e44 = _0x5af209;
           
           if (_0x41951a) continue;
           
-          return _0xbdb751[_0x3d92e5(688)](sendUpstream, _0x3ceaeb, _0x26c461, _0x5af209, null);
+          return _0xbdb751.axyKm(sendUpstream, _0x3ceaeb, _0x26c461, _0x5af209, null);
         } else {
-          const _0x1e56e3 = _0x5df31f['get'](_0x122e77);
+          const _0x1e56e3 = _0x5df31f.get(_0x122e77);
           
-          _0x1e56e3 && (_0x5e5c78 -= _0x1e56e3.size, _0xf921e3['delete'](_0xc69fcf));
+          _0x1e56e3 && (_0x5e5c78 -= _0x1e56e3.size, _0xf921e3.delete(_0xc69fcf));
           _0x334853.size = lygiDv.sXWOf(_0x12fa25.body.length, 1024);
-          _0x33b945['set'](_0x3e6de7, _0x7c0b9b);
+          _0x33b945.set(_0x3e6de7, _0x7c0b9b);
           _0x31590b += _0x470435.size;
           
-          while (lygiDv[_0x3d92e5(516)](_0x1be4b9, _0x3fa102) && _0x57af07.size) {
-            const [_0x52c8a3, _0x186b42] = _0x49d659.entries().next()['value'];
+          while (lygiDv.BuARm(_0x1be4b9, _0x3fa102) && _0x57af07.size) {
+            const [_0x52c8a3, _0x186b42] = _0x49d659.entries().next().value;
             _0x42641f.delete(_0x52c8a3);
-            _0x992ba2 -= _0x186b42['size'];
+            _0x992ba2 -= _0x186b42.size;
           }
         }
       }
       
       return (
         markOk(_0x39fcba),
-        _0xbdb751['EVjmB'](sendUpstream, _0x3ceaeb, _0x26c461, _0x5af209, _0x56dcfa)
+        _0xbdb751.EVjmB(sendUpstream, _0x3ceaeb, _0x26c461, _0x5af209, _0x56dcfa)
       )
     }
   }
   
-  if (_0x761e44) return _0xbdb751[_0x3d92e5(543)](sendUpstream, _0x3ceaeb, _0x26c461, _0x761e44, null);
+  if (_0x761e44) return _0xbdb751.EVjmB(sendUpstream, _0x3ceaeb, _0x26c461, _0x761e44, null);
   
-  return _0xbdb751[_0x3d92e5(726)](sendBusy, _0x26c461);
+  return _0xbdb751.WEEcA(sendBusy, _0x26c461);
 }
 
 const requestListener = (_0x2c62ec, _0x597c3c) => {
@@ -1486,19 +1485,19 @@ const requestListener = (_0x2c62ec, _0x597c3c) => {
   const _0x51c460 = {
     'WrhhG': function(_0x145bc3, _0x32953e, _0x44f53e, _0x1a410e) { return _0x145bc3(_0x32953e, _0x44f53e, _0x1a410e); },
     'bgZac': 'Proxy Error',
-    'muewO': _0x458a28(389),
-    'AlOYe': _0x458a28(721)
+    'muewO': 'SBDWW',
+    'AlOYe': 'jBriU'
   };
   
-  handle (_0x2c62ec, _0x597c3c)[_0x458a28(385)](_0x12af1a => {
+  handle(_0x2c62ec, _0x597c3c).catch(_0x12af1a => {
     const _0x472444 = _0x458a28;
-    console['error'](_0x472444(718), _0x12af1a && _0x12af1a[_0x472444(719)]);
+    console.error('[handle]', _0x12af1a && _0x12af1a.message);
     
-    if (!_0x597c3c['headersSent']) _0x51c460[_0x472444(534)](sendText, _0x597c3c, 502, _0x51c460['bgZac']);
+    if (!_0x597c3c.headersSent) _0x51c460.WrhhG(sendText, _0x597c3c, 502, _0x51c460.bgZac);
     else try {
-      if (_0x51c460[_0x472444(771)] !== _0x51c460[_0x472444(494)]) _0x597c3c.destroy();
+      if (_0x51c460.muewO !== _0x51c460.AlOYe) _0x597c3c.destroy();
       else return (
-        _0x529421['delete'](_0x2092e5),
+        _0x529421.delete(_0x2092e5),
         _0x3ea322 -= _0x49bf43.size,
         null
       )
@@ -1506,30 +1505,30 @@ const requestListener = (_0x2c62ec, _0x597c3c) => {
   });
 };
 
-module[a0_0x47efcc(505)] = requestListener;
-module[a0_0x47efcc(505)][a0_0x47efcc(386)] = {
+module.exports = requestListener;
+module.exports.config = {
   'api': {
     'bodyParser': false
   }
 };
-module[a0_0x47efcc(505)][a0_0x47efcc(537)] = {
+module.exports._internals = {
   'workers': workers,
   'cache': cache
 };
 
-if (require[a0_0x47efcc(302)] === module) {
-  const PORT = num(env['PORT'], 10000);
-  const server = http[a0_0x47efcc(697)](requestListener);
+if (require.main === module) {
+  const PORT = num(env.PORT, 10000);
+  const server = http.createServer(requestListener);
   
-  server['keepAliveTimeout'] = 65000;
-  server[a0_0x47efcc(442)] = 66000;
-  server[a0_0x47efcc(596)](PORT, a0_0x47efcc(648), () => {
+  server.keepAliveTimeout = 65000;
+  server.headersTimeout = 66000;
+  server.listen(PORT, '0.0.0.0', () => {
     const _0x3d0044 = a0_0x47efcc;
     const _0x28f6db = {
       'ECHFT': function(_0x548bbd, _0x3510cb) { return _0x548bbd + _0x3510cb; },
       'GMimx': function(_0x5ec607, _0x23cf27) { return _0x5ec607 + _0x23cf27; },
       'NopfU' :function(_0x1d7f92, _0x46cd2a) { return _0x1d7f92 + _0x46cd2a; },
-      'BUQzD': _0x3d0044(324),
+      'BUQzD': '[proxy] listening on :',
       'cMKKt': '\x20/\x20workers=',
       'dlutY': '\x20/\x20reset=UTC\x20',
       'cQShq': ':00\x20(日本時間\x20',
@@ -1537,31 +1536,31 @@ if (require[a0_0x47efcc(302)] === module) {
       'xCwLo': function(_0x52a4c5, _0x3f8811) { return _0x52a4c5 / _0x3f8811; }
     };
     
-    console.log(_0x28f6db[_0x3d0044(306)](_0x28f6db[_0x3d0044(621)](_0x28f6db['GMimx'](_0x28f6db[_0x3d0044(306)](_0x28f6db[_0x3d0044(306)](_0x28f6db[_0x3d0044(569)](_0x28f6db[_0x3d0044(569)](_0x28f6db[_0x3d0044(491)], PORT), _0x28f6db[_0x3d0044(333)]), workers.length) + _0x28f6db['dlutY'], RESET_OFFSET / 3600000), _0x28f6db['cQShq']), _0x28f6db['ZeiHl'](_0x28f6db[_0x3d0044(569)](_0x28f6db[_0x3d0044(542)](RESET_OFFSET, 3600000), 9), 24)), ':00)'));
+    console.log(_0x28f6db.ECHFT(_0x28f6db.GMimx(_0x28f6db.GMimx(_0x28f6db.ECHFT(_0x28f6db.ECHFT(_0x28f6db.NopfU(_0x28f6db.NopfU(_0x28f6db.BUQzD, PORT), _0x28f6db.cMKKt), workers.length) + _0x28f6db.dlutY, RESET_OFFSET / 3600000), _0x28f6db.cQShq), _0x28f6db.ZeiHl(_0x28f6db.NopfU(_0x28f6db.xCwLo(RESET_OFFSET, 3600000), 9), 24)), ':00)'));
   });
-  server['on'](a0_0x47efcc(471),(_0x3af7ba, _0x11de11) => {
+  server.on('clientError', (_0x3af7ba, _0x11de11) => {
     try {
-      _0x11de11['destroy']();
+      _0x11de11.destroy();
     } catch (_0xf7d33a) {}});
   
   const stop = () => {
     const _0x495f47 = a0_0x47efcc;
     
-    server['close'](() => process.exit(0));
+    server.close(() => process.exit(0));
     setTimeout(() => process.exit(0), 5000).unref();
   };
   
-  process['on']('SIGTERM', stop);
-  process['on'](a0_0x47efcc(450), stop);
-  process['on'](a0_0x47efcc(376), _0xa2a9ec => console.error(a0_0x47efcc(453), _0xa2a9ec && _0xa2a9ec['message']));
-  process['on'](a0_0x47efcc(397), _0x258272 => console.error(a0_0x47efcc(628), _0x258272 && _0x258272['message']));
-  env[a0_0x47efcc(705)] === '1' && env[a0_0x47efcc(637)] && setInterval(() => {
+  process.on('SIGTERM', stop);
+  process.on('SIGINT', stop);
+  process.on('unhandledRejection', _0xa2a9ec => console.error('[unhandledRejection]', _0xa2a9ec && _0xa2a9ec.message));
+  process.on('uncaughtException', _0x258272 => console.error('[uncaughtException]', _0x258272 && _0x258272.message));
+  env.KEEP_ALIVE === '1' && env.RENDER_EXTERNAL_URL && setInterval(() => {
     const _0x2c9b20 = a0_0x47efcc;
     const _0x4b3116 = {
       'efMpR': '/_proxy/health',
       'LpyCN': 'error'
     };
     
-    https.get(env[_0x2c9b20(637)]['replace'](/\/+$/,'') + _0x4b3116[_0x2c9b20(548)], _0x2791b1 => _0x2791b1[_0x2c9b20(403)]())['on'](_0x4b3116[_0x2c9b20(297)], () => {});
+    https.get(env.RENDER_EXTERNAL_URL.replace(/\/+$/,'') + _0x4b3116.efMpR, _0x2791b1 => _0x2791b1.resume()).on(_0x4b3116.LpyCN, () => {});
   }, 10 * 60 * 1000).unref();
 }
