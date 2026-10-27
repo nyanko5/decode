@@ -1128,7 +1128,7 @@ function readBody(_0x1468fe, _0x2ec702) {
           MlQSEE[_0x4178f2(436)](_0x51826d, _0x399435);
         }
       });
-      _0x1468fe['on']('end' () => _0x79b269 ? _0x32edfe(Object['assign'](new Error(_0x261645(631)), {
+      _0x1468fe['on']('end', () => _0x79b269 ? _0x32edfe(Object['assign'](new Error(_0x261645(631)), {
         'code': _0x261645(639)
       })) : _0x22aa4f(Buffer[_0x261645(449)](_0x3d9c19)));
       _0x1468fe['on']('error', _0x32edfe);
