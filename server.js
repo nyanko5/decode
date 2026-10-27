@@ -1,7 +1,3 @@
-import { main, returnArrayStrings } from "./main.js";
-
-const a0_0x47efcc = main;
-
 const a0_0x59777e = (function() {
   let _0x422cd9 = true;
   
@@ -66,7 +62,6 @@ const https = require('https');
 const { URL } = require('url');
 const env = process.env;
 const num = (_0x47b474, _0x2cdef1) => {
-  const _0x27a8fe = a0_0x47efcc;
   const _0x4e88f5 = {
     'eTJFR': function(_0x221abe, _0xaf5d14) { return _0x221abe !== _0xaf5d14; }
   };
@@ -118,7 +113,6 @@ for (const s of rawList.split(/[\x20,]+/).map(_0x4eae20 => _0x4eae20.trim().repl
 }
 
 function rollover(_0x3ec273) {
-  const _0x2d3695 = a0_0x47efcc;
   const _0x70e52c = {
     'qiFNO': function(_0x2ef505, _0x2bbe35) { return _0x2ef505 !== _0x2bbe35; },
     'pwSuj': function(_0xff39fe, _0x5908d7){ return _0xff39fe === _0x5908d7; },
@@ -139,7 +133,6 @@ function rollover(_0x3ec273) {
 }
 
 function block(_0x3c7f7c, _0x15f983, _0x59b646) {
-  const _0x374b09 = a0_0x47efcc;
   const _0x4ea2ca = {
     'qauvx': function(_0xb6fc03, _0x5e9b2e) { return _0xb6fc03 + _0x5e9b2e; },
     'OskGG': function(_0x5bfafb, _0x509694) { return _0x5bfafb + _0x509694; },
@@ -156,12 +149,10 @@ function block(_0x3c7f7c, _0x15f983, _0x59b646) {
 }
 
 function markOk(_0x76f179) {
-  const _0x107f08 = a0_0x47efcc;
   _0x76f179.fails = 0;
 }
 
 function markFail(_0x246637, _0x1b6590) {
-  const _0x4fc346 = a0_0x47efcc;
   const _0x5c0ee9 = {
     'iIdBz': function(_0x489178, _0x1ffa28) { return _0x489178 >= _0x1ffa28; },
     'NlpfQ': function(_0x278df3, _0xd4659b, _0x15c344, _0x494013) { return _0x278df3(_0xd4659b, _0x15c344, _0x494013); },
@@ -174,7 +165,6 @@ function markFail(_0x246637, _0x1b6590) {
 }
 
 async function applyKind(_0x24bc09, _0xf3df15) {
-  const _0x44e176 = a0_0x47efcc;
   const _0x46e2d2 = {
     'uRQww': 'public, max-age=86400',
     'SOMHH': function(_0x767e4a, _0x13e1f0) { return _0x767e4a === _0x13e1f0; },
@@ -216,7 +206,6 @@ async function applyKind(_0x24bc09, _0xf3df15) {
 }
 
 function pick(_0x559529) {
-  const _0x1fd04c = a0_0x47efcc;
   const _0x128bd8 = {
     'qgvBq': function(_0x492222, _0x49ab5a) { return _0x492222 !== _0x49ab5a; },
     'mltQO': 'VYTce',
@@ -243,14 +232,13 @@ function pick(_0x559529) {
   if (!_0x11bdf5.length) return null;
   
   return (
-    _0x11bdf5.sort(() => Math[_0x1fd04c(691)]() - 0.5),
+    _0x11bdf5.sort(() => Math.random() - 0.5),
     _0x11bdf5.sort((_0x56a768, _0x1f0e1c) => _0x56a768.used - _0x1f0e1c.used),
     _0x11bdf5[0]
   );
 }
 
 function soonestRetrySec() {
-  const _0x13856d = a0_0x47efcc;
   const _0x9b094f = {
     'Kjchp': function(_0x4a87b0, _0x59e618) { return _0x4a87b0 - _0x59e618; },
     'xBiIz': function(_0xa9982, _0x1cc777) { return _0xa9982 / _0x1cc777; }
@@ -272,7 +260,6 @@ const RATE_RE = /error\x20*code:?\x20*1015|error\x20*1015|you are being rate lim
 const WERR_RE = /error\x20*code:?\x20*110[12]|error\x20*110[12]|worker threw exception|exceeded resource limits/i;
 
 function classify(_0x4beeb3, _0x4295ef) {
-  const _0x401c32 = a0_0x47efcc;
   const _0x4394c3 = {
     'DxXAa': 'quota',
     'ffZVJ': 'rate',
@@ -293,7 +280,6 @@ function classify(_0x4beeb3, _0x4295ef) {
 const shareKey = _0x456ea4 => 'wproxy:block:' + _0x456ea4.url.host;
 
 async function rest(_0x1354b4) {
-  const _0x154951 = a0_0x47efcc;
   const _0x4111fd = {
     'rGiFr': 'shared',
     'bocAp': 'HIT',
@@ -390,7 +376,6 @@ async function rest(_0x1354b4) {
 }
 
 async function shareBlock(_0x2308cd) {
-  const _0x4468d3 = a0_0x47efcc;
   const _0x2ae5e = {
     'hnsfv': function(_0x240b0c, _0x4e8fcc) { return _0x240b0c / _0x4e8fcc; },
     'DmJme': function(_0x3c89e2, _0x57428e) { return _0x3c89e2 - _0x57428e; },
@@ -412,7 +397,6 @@ async function shareBlock(_0x2308cd) {
 let lastSync = 0;
 
 async function syncShared() {
-  const _0x1599f7 = a0_0x47efcc;
   const _0x388a0c = {
     'nJfOl': function(_0x1ba825, _0x5a0f96) { return _0x1ba825 === _0x5a0f96; },
     'bBJgS': 'quota',
@@ -439,7 +423,6 @@ async function syncShared() {
   const _0x3aae34 = Date.now();
   
   workers.forEach((_0x32a7dc, _0x739b29) => {
-    const _0x45a8a1 = _0x1599f7;
     const _0x152522 = Number(_0xb41bec.result[_0x739b29]);
     
     if (Number.isFinite(_0x152522) && _0x388a0c.ApVTq(_0x152522, _0x3aae34)) {
@@ -456,7 +439,6 @@ let cacheHits = 0;
 let cacheMiss = 0;
 
 function cacheGet(_0x254554) {
-  const _0x246e65 = a0_0x47efcc;
   const _0x5336d0 = cache.get(_0x254554);
   
   if (!_0x5336d0) return null;
@@ -474,7 +456,6 @@ function cacheGet(_0x254554) {
 }
 
 function cacheSet(_0x1e6e00, _0x50c0ba) {
-  const _0x37a0ac = a0_0x47efcc;
   const _0x189504 = {
     'XmPoD': function(_0x139bf5, _0x47f2d3) { return _0x139bf5 !== _0x47f2d3; },
     'KATtd': 'koBqI',
@@ -507,7 +488,6 @@ function cacheSet(_0x1e6e00, _0x50c0ba) {
 const STATIC_CT = /^(image\/|font\/|text\/css|(application|text)\/(x-)?javascript|application\/(x-)?font|application\/vnd\.ms-fontobject)/i;
 
 function ttlOf(_0x4bbd5d) {
-  const _0x4709b0 = a0_0x47efcc;
   const _0x1b9822 = {
     'GSSQF': function(_0x3fffa3, _0x34e29a) { return _0x3fffa3(_0x34e29a); }
   };
@@ -519,7 +499,6 @@ function ttlOf(_0x4bbd5d) {
 }
 
 function cookieOf(_0x4b1b87, _0x5880b1) {
-  const _0x1b783b = a0_0x47efcc;
   const _0x27c510 = {
     'nGRfr': function(_0x365ad5, _0x18bf7d) { return _0x365ad5 + _0x18bf7d; },
     'BIJSf': '(?:^|;\s*)',
@@ -536,7 +515,6 @@ const dropReq = _0x48b67e => REQ_DROP.has(_0x48b67e) || _0x48b67e.startsWith('cf
 const publicHost = _0x445970 => String(_0x445970.headers['x-forwarded-host'] || _0x445970.headers.host || '').split(',')[0]['trim']();
 
 function buildHeaders(_0x4d6500, _0x450dfc) {
-  const _0x22b66a = a0_0x47efcc;
   const _0x563af5 = {
     'sFtPy': function(_0x57fc6e, _0x43e60f) { return _0x57fc6e(_0x43e60f); },
     'ATJHm': 'x-forwarded-host',
@@ -579,7 +557,6 @@ const httpAgent = new http.Agent({
 });
 
 function attempt(_0x4b9a72, _0x1f4728) {
-  const _0x523323 = a0_0x47efcc;
   const _0xd48df5 = {
     'pyzNe': function(_0x5555f2, _0x33ea7d) { return _0x5555f2 > _0x33ea7d; },
     'gLJGC': function(_0xdd161e, _0x172505) { return _0xdd161e === _0x172505; },
@@ -613,7 +590,6 @@ function attempt(_0x4b9a72, _0x1f4728) {
   };
   
   return new Promise(_0x1b4755 => {
-    const _0x464b75 = _0x523323;
     const _0x4a60a1 = {
       'fAXzq': function(_0x38d6f7, _0x145da4, _0x559c3b) {
         const _0x20ce31 = main;
@@ -622,9 +598,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
       },
       'pzPmY': _0xd48df5.nwoDP,
       'CigTr': _0xd48df5.pdZgW,
-      'wwSbF': function(_0x3c8e93, _0x2e676d) {
-        const _0x578346 = _0x464b75;
-        
+      'wwSbF': function(_0x3c8e93, _0x2e676d) {        
         return _0xd48df5.gLJGC(_0x3c8e93, _0x2e676d);
       },
       'wgofK': _0xd48df5.DSAtj,
@@ -635,15 +609,11 @@ function attempt(_0x4b9a72, _0x1f4728) {
       'wJFcA': function(_0x4c1ea3, _0x24413d) { return _0x4c1ea3 !== _0x24413d; },
       'Atxdh': _0xd48df5.ZeVhP,
       'rKHqD': _0xd48df5.nUFIV,
-      'uovST': function(_0x2d1b81, _0xdfd656) {
-        const _0x162f4d = _0x464b75;
-        
+      'uovST': function(_0x2d1b81, _0xdfd656) {        
         return _0xd48df5.isKZg(_0x2d1b81, _0xdfd656);
       },
       'wNAkq': _0xd48df5.ADaLd,
-      'YddqD': function(_0x429729, _0x1aa7b3) {
-        const _0x301fe7 = _0x464b75;
-        
+      'YddqD': function(_0x429729, _0x1aa7b3) {        
         return _0xd48df5.RXwau(_0x429729, _0x1aa7b3);
       },
       'muQNk': _0xd48df5.kawRy,
@@ -654,34 +624,24 @@ function attempt(_0x4b9a72, _0x1f4728) {
       'xblxm': _0xd48df5.ZNorC,
       'xvTZH': _0xd48df5.QgeEp,
       'gwEAO': _0xd48df5.znUSn,
-      'qYHaE': function(_0x3d908d, _0x2b8995) {
-        const _0x22ad86 = _0x464b75;
-        
+      'qYHaE': function(_0x3d908d, _0x2b8995) {        
         return _0xd48df5.TDKPW(_0x3d908d, _0x2b8995);
       },
-      'mqhDL': function(_0x1ffcec, _0x3c3052) {
-        const _0x598abc = _0x464b75;
-        
+      'mqhDL': function(_0x1ffcec, _0x3c3052) {        
         return _0xd48df5.zjptz(_0x1ffcec, _0x3c3052);
       },
       'djrjK': function(_0x50df52, _0x7a27c1) { return _0xd48df5.MBFcN(_0x50df52, _0x7a27c1); },
-      'jiTvX': function(_0x4843dd, _0x434c1e) {
-        const _0x1812fd = _0x464b75;
-        
+      'jiTvX': function(_0x4843dd, _0x434c1e) {        
         return _0xd48df5.TDKPW(_0x4843dd, _0x434c1e);
       },
-      'mAMQK': function(_0x8b6e80, _0x19a61f) {
-        const _0x45841f = _0x464b75;
-        
+      'mAMQK': function(_0x8b6e80, _0x19a61f) {        
         return _0xd48df5.RjUGK(_0x8b6e80, _0x19a61f);
       },
       'XhhkM': function(_0xcbb378, _0x296968) { return _0xd48df5.TDKPW(_0xcbb378, _0x296968); },
       'NzHlA': function(_0x3f3220, _0x4d82df) { return _0xd48df5.MBFcN(_0x3f3220, _0x4d82df); },
       'ARGLB': '/ workers=',
       'ddelv': '\x20/\x20reset=UTC',
-      'wnkwS': function(_0x549a1e, _0x4f56c1) {
-        const _0x5e1065 = _0x464b75;
-        
+      'wnkwS': function(_0x549a1e, _0x4f56c1) {        
         return _0xd48df5.tpiEO(_0x549a1e, _0x4f56c1);
       },
       'kZqPS': _0xd48df5.OqfyX,
@@ -692,7 +652,6 @@ function attempt(_0x4b9a72, _0x1f4728) {
     let _0x3d2a1d = false;
     let _0xb53ec0 = null;
     const _0x13ef3e = _0xfe12af => {
-      const _0x4595ba = _0x464b75;
       const _0x115577 = {
         'VhtLw': function(_0x8a4aa3, _0x37aef8) {
           const _0x22a3bf = main;
@@ -735,7 +694,6 @@ function attempt(_0x4b9a72, _0x1f4728) {
         'agent': _0x349671 ? httpAgent : httpsAgent
       },
       _0x23f22f => {
-        const _0x3e2b1e = _0x464b75;
         if (_0x4a60a1.wJFcA(_0x4a60a1.Atxdh, _0x4a60a1.rKHqD)) {
           _0x4a60a1.uovST(clearTimeout, _0xb53ec0);
           const _0x490f3c = _0x23f22f.statusCode;
@@ -760,7 +718,6 @@ function attempt(_0x4b9a72, _0x1f4728) {
               const _0x6273eb = [];
               _0x23f22f.on(_0x4a60a1.fpntu, _0x118f2c => _0x6273eb.push(_0x118f2c));
               _0x23f22f.on(_0x4a60a1.QtVYF, () => {
-                const _0xe8e19b = _0x3e2b1e;
                 if (_0x4a60a1.wwSbF(_0x4a60a1.wgofK, _0x4a60a1.JrlwO)) {
                   _0x4db7b7.destroy();
                 } else {
@@ -795,7 +752,6 @@ function attempt(_0x4b9a72, _0x1f4728) {
     );
     
     _0xb53ec0 = setTimeout(() => {
-      const _0x17e85a = _0x464b75;
       const _0xe18691 = {
         'pEzWM': function(_0x327d02, _0x2b21b1) { return _0x327d02 !== _0x2b21b1; }
       };
@@ -813,9 +769,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
     _0x584c5c.on(_0xd48df5.JLUlK, _0x491320 => _0x13ef3e({
       'error': _0x491320 && _0x491320.code || 'ERROR'
     }));
-    _0x1f4728.cancel = () => {
-      const _0xf3195d = _0x464b75;
-      
+    _0x1f4728.cancel = () => {      
       if (_0x4a60a1.WSgWX(_0x4a60a1.iCEcx, _0x4a60a1.iCEcx)) {
         _0x25b5fb.log(_0x4a60a1.qYHaE(_0x4a60a1.mqhDL(_0x4a60a1.djrjK(_0x4a60a1.jiTvX(_0x4a60a1.mAMQK(_0x4a60a1.XhhkM(_0x4a60a1.NzHlA('[proxy] listening on :' + _0x3d4911, _0x4a60a1.ARGLB), _0x5916b2.length), _0x4a60a1.ddelv), _0x4a60a1.wnkwS(_0x5e9983, 3600000)), ':00\x20(日本時間\x20'), (_0x443937 / 3600000 + 9) % 24), _0x4a60a1.kZqPS));
       } else try {
@@ -837,7 +791,6 @@ function attempt(_0x4b9a72, _0x1f4728) {
 }
 
 function sendText(_0x123509, _0x4832ca, _0x29ed62, _0x30f989) {
-  const _0x440097 = a0_0x47efcc;
   const _0x5923a8 = {
     'kclZl': function(_0x400c2c, _0x2aedc0) { return _0x400c2c === _0x2aedc0; },
     'QXuUq': 'rPtkP',
@@ -870,7 +823,6 @@ function sendText(_0x123509, _0x4832ca, _0x29ed62, _0x30f989) {
 }
 
 function sendBusy(_0x3df449) {
-  const _0x479776 = a0_0x47efcc;
   const _0x1283b7 = {
     'WvlbE': function(_0x4cbaf9, _0x6ab412) { return _0x4cbaf9 === _0x6ab412; },
     'fgVFD': 'E2BIG',
@@ -909,7 +861,6 @@ function sendBusy(_0x3df449) {
 }
 
 function sendUpstream(_0x26eaab, _0x3e74be, _0x5810cd, _0x1c7edd) {
-  const _0x2fbb26 = a0_0x47efcc;
   const _0xa56100 = {
     'gXDEJ': function(_0x167737, _0x19fc3a) { return _0x167737 > _0x19fc3a; },
     'EpnPr': 'http://x',
@@ -986,9 +937,7 @@ function sendUpstream(_0x26eaab, _0x3e74be, _0x5810cd, _0x1c7edd) {
   }
   
   _0x124e4b.pipe(_0x3e74be);
-  _0x167218 && (_0x124e4b.on(_0xa56100.raNsu, _0x21ff56 => {
-    const _0x530e73 = _0x2fbb26;
-    
+  _0x167218 && (_0x124e4b.on(_0xa56100.raNsu, _0x21ff56 => {    
     if (!_0x167218.ok) return;
     
     _0x167218.size += _0x21ff56.length;
@@ -999,7 +948,6 @@ function sendUpstream(_0x26eaab, _0x3e74be, _0x5810cd, _0x1c7edd) {
     } else _0x167218.chunks.push(_0x21ff56);
   }),
   _0x124e4b.on(_0xa56100.hnSIo, () => {
-    const _0x5981d2 = _0x2fbb26;
     _0xa56100.blJkV === _0xa56100.blJkV ? _0x167218.ok && !_0x124e4b.aborted && _0xa56100.ICnUo(cacheSet, _0x1c7edd, {
       'status': _0x3a1143,
       'headers': _0x3a5fbd,
@@ -1014,7 +962,6 @@ function sendUpstream(_0x26eaab, _0x3e74be, _0x5810cd, _0x1c7edd) {
     } catch (_0x1cf05b) {}
   });
   _0x124e4b.on(_0xa56100.KkDxK, () => {
-    const _0x5668fb = _0x2fbb26;
     try {
       _0x3e74be.destroy();
     } catch (_0x272708) {}
@@ -1022,7 +969,6 @@ function sendUpstream(_0x26eaab, _0x3e74be, _0x5810cd, _0x1c7edd) {
 }
 
 function serveCached(_0x1cd095, _0x5ed84d, _0x2be3ad) {
-  const _0x7faf8f = a0_0x47efcc;
   const _0x29d046 = {
     'WUnia': 'HIT',
     'JpHdj': function(_0x2ab970, _0x5665c7) { return _0x2ab970(_0x5665c7); },
@@ -1094,7 +1040,6 @@ function serveCached(_0x1cd095, _0x5ed84d, _0x2be3ad) {
 }
 
 function readBody(_0x1468fe, _0x2ec702) {
-  const _0x363b72 = a0_0x47efcc;
   const _0x50ce26 = {
     'nNRDU': 'data',
     'yGnnU': 'end',
@@ -1107,20 +1052,15 @@ function readBody(_0x1468fe, _0x2ec702) {
   };
   
   return new Promise((_0x22aa4f, _0x32edfe) => {
-    const _0x261645 = _0x363b72;
     const _0xdc4752 = {
       'Hkqdq': function(_0x4436f3, _0x7f7450) { return _0x50ce26.QDgia(_0x4436f3, _0x7f7450); },
       'UxHqc': function(_0x6f2bec, _0x3e34da) { return _0x6f2bec(_0x3e34da); },
       'Pwikf': function(_0xff3848, _0x5e4661) {
-        const _0x326cde = main;
-        
         return _0x50ce26.RTnGK(_0xff3848, _0x5e4661);
       },
       'fGIgy': 'IwQSG',
       'dXlwe': function(_0x1f57c2, _0x26067b) { return _0x1f57c2 > _0x26067b; },
-      'oHyvN': function(_0xe53358, _0x212a43) {
-        const _0x4c386d = _0x261645;
-        
+      'oHyvN': function(_0xe53358, _0x212a43) {        
         return _0x50ce26.RNdoN(_0xe53358, _0x212a43);
       }
     };
@@ -1130,9 +1070,7 @@ function readBody(_0x1468fe, _0x2ec702) {
       let _0x187320 = 0;
       let _0x79b269 = false;
       
-      _0x1468fe.on(_0x50ce26.nNRDU, _0x1f2459 => {
-        const _0x4178f2 = _0x261645;
-        
+      _0x1468fe.on(_0x50ce26.nNRDU, _0x1f2459 => {        
         if (_0xdc4752.Pwikf(_0xdc4752.fGIgy, _0xdc4752.fGIgy)) {
           if (_0x79b269) return;
           
@@ -1159,9 +1097,7 @@ function readBody(_0x1468fe, _0x2ec702) {
       let _0x286a71 = false;
       
       _0x46a32d.on(_0x50ce26.nNRDU,
-      _0x435f4f => {
-        const _0x483ca5 = _0x261645;
-        
+      _0x435f4f => {        
         if (_0x286a71) return;
         
         _0x2b26df += _0x435f4f.length;
@@ -1181,7 +1117,6 @@ function readBody(_0x1468fe, _0x2ec702) {
 }
 
 async function handle(_0x3ceaeb, _0x26c461) {
-  const _0x3d92e5 = a0_0x47efcc;
   const _0xbdb751 = {
     'EIebK': function(_0x49870c, _0x39818d, _0x3ded8b) { return _0x49870c(_0x39818d, _0x3ded8b); },
     'pMrtm': function(_0x24cc88, _0x4bb45d) { return _0x24cc88 + _0x4bb45d; },
@@ -1376,9 +1311,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
     'dead': false
   };
   
-  _0x26c461.on('close', () => {
-    const _0x250a4f = _0x3d92e5;
-    
+  _0x26c461.on('close', () => {    
     if (!_0x26c461.writableEnded) {
       _0x1195a8.dead = true;
       
@@ -1481,7 +1414,6 @@ async function handle(_0x3ceaeb, _0x26c461) {
 }
 
 const requestListener = (_0x2c62ec, _0x597c3c) => {
-  const _0x458a28 = a0_0x47efcc;
   const _0x51c460 = {
     'WrhhG': function(_0x145bc3, _0x32953e, _0x44f53e, _0x1a410e) { return _0x145bc3(_0x32953e, _0x44f53e, _0x1a410e); },
     'bgZac': 'Proxy Error',
@@ -1490,7 +1422,6 @@ const requestListener = (_0x2c62ec, _0x597c3c) => {
   };
   
   handle(_0x2c62ec, _0x597c3c).catch(_0x12af1a => {
-    const _0x472444 = _0x458a28;
     console.error('[handle]', _0x12af1a && _0x12af1a.message);
     
     if (!_0x597c3c.headersSent) _0x51c460.WrhhG(sendText, _0x597c3c, 502, _0x51c460.bgZac);
@@ -1523,7 +1454,6 @@ if (require.main === module) {
   server.keepAliveTimeout = 65000;
   server.headersTimeout = 66000;
   server.listen(PORT, '0.0.0.0', () => {
-    const _0x3d0044 = a0_0x47efcc;
     const _0x28f6db = {
       'ECHFT': function(_0x548bbd, _0x3510cb) { return _0x548bbd + _0x3510cb; },
       'GMimx': function(_0x5ec607, _0x23cf27) { return _0x5ec607 + _0x23cf27; },
@@ -1543,9 +1473,7 @@ if (require.main === module) {
       _0x11de11.destroy();
     } catch (_0xf7d33a) {}});
   
-  const stop = () => {
-    const _0x495f47 = a0_0x47efcc;
-    
+  const stop = () => {    
     server.close(() => process.exit(0));
     setTimeout(() => process.exit(0), 5000).unref();
   };
@@ -1555,7 +1483,6 @@ if (require.main === module) {
   process.on('unhandledRejection', _0xa2a9ec => console.error('[unhandledRejection]', _0xa2a9ec && _0xa2a9ec.message));
   process.on('uncaughtException', _0x258272 => console.error('[uncaughtException]', _0x258272 && _0x258272.message));
   env.KEEP_ALIVE === '1' && env.RENDER_EXTERNAL_URL && setInterval(() => {
-    const _0x2c9b20 = a0_0x47efcc;
     const _0x4b3116 = {
       'efMpR': '/_proxy/health',
       'LpyCN': 'error'
