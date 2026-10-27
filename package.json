@@ -1,7 +1,6 @@
 {
   "name": "vercel-worker-proxy",
   "version": "1.0.0",
-  "type": "module",
   "private": true,
   "description": "nm-tool",
   "engines": { "node": "20.x" },
