@@ -31,7 +31,7 @@ const nextUtcMidnight = () => (utcDay() + 1) * 86400000 + RESET_OFFSET;
 const jst = _0x56a41e => new Date(_0x56a41e + 9 * 3600000).toISOString().replace('T','\x20').slice(0, 16) + JST;
 const workers = [];
 
-for (const s of rawList.split(/[\x20,]+/).map(_0x4eae20 => _0x4eae20.trim().replace(/\/+$/,'')).filter(Boolean)) {
+for (const s of rawList.split(/[ ,]+/).map(_0x4eae20 => _0x4eae20.trim().replace(/\/+$/,'')).filter(Boolean)) {
   try {
     const u = new URL(s);
     
@@ -88,41 +88,17 @@ function markFail(_0x246637, _0x1b6590) {
 }
 
 async function applyKind(_0x24bc09, _0xf3df15) {
-  const _0x46e2d2 = {
-    'uRQww': 'public, max-age=86400',
-    'SOMHH': function(_0x767e4a, _0x13e1f0) { return _0x767e4a === _0x13e1f0; },
-    'oGguo': 'quota',
-    'TDjVf': function(_0x4c6313, _0x28b520, _0x2d450c, _0x4b7368) { return _0x4c6313(_0x28b520, _0x2d450c, _0x4b7368); },
-    'nBllr': function(_0x5ceda6, _0xe7a9cd) { return _0x5ceda6 - _0xe7a9cd; },
-    'nQXWp': function(_0x48e781) { return _0x48e781(); },
-    'LvaaJ': function(_0x1efd42, _0x1854c2) { return _0x1efd42(_0x1854c2); },
-    'tSqxR': 'rate',
-    'PPQHk': function(_0x53ad72, _0xbbc9e3) { return _0x53ad72 !== _0xbbc9e3; },
-    'xtJIH': 'wKPnQ',
-    'lThWK': 'RDKKw',
-    'lihsO': 'workererr',
-    'LGksH': function(_0x1c5304, _0x31ccb2, _0x5836db) { return _0x1c5304(_0x31ccb2, _0x5836db); },
-    'CGkEp': 'worker-error'
-  };
-  
-  if (_0x46e2d2.SOMHH(_0xf3df15, _0x46e2d2.oGguo)) {
-    _0x46e2d2.TDjVf(block, _0x24bc09, _0x46e2d2.nBllr(_0x46e2d2.nQXWp(nextUtcMidnight), Date.now()) + 30000, _0x46e2d2.oGguo);
+  if (_0xf3df15 === 'quota') {
+    block(_0x24bc09, nextUtcMidnight() - Date.now() + 30000, 'quota');
     _0x24bc09.fails = 0;
-    await _0x46e2d2.LvaaJ(shareBlock, _0x24bc09);
+    await shareBlock(_0x24bc09);
   } else {
-    if (_0x46e2d2.SOMHH(_0xf3df15, _0x46e2d2.tSqxR)) {
-      if (_0x46e2d2.PPQHk(_0x46e2d2.xtJIH, _0x46e2d2.lThWK)) {
-        block(_0x24bc09, 60000, _0x46e2d2.tSqxR);
-        await shareBlock(_0x24bc09);
-      } else {
-        return _0x3b3d19.writeHead(204, {
-          'cache-control': _0x46e2d2.uRQww
-        }),
-          _0x32476e.end();
-      }
+    if (_0xf3df15 === 'rate') {
+      block(_0x24bc09, 60000, 'rate');
+      await shareBlock(_0x24bc09);
     } else {
-      if (_0x46e2d2.SOMHH(_0xf3df15, _0x46e2d2.lihsO)) {
-        _0x46e2d2.LGksH(markFail, _0x24bc09, _0x46e2d2.CGkEp);
+      if (_0xf3df15 === 'workererr') {
+        markFail(_0x24bc09, 'worker-error');
       }
     }
   }
@@ -155,40 +131,30 @@ function pick(_0x559529) {
 }
 
 function soonestRetrySec() {
-  const _0x9b094f = {
-    'Kjchp': function(_0x4a87b0, _0x59e618) { return _0x4a87b0 - _0x59e618; },
-    'xBiIz': function(_0xa9982, _0x1cc777) { return _0xa9982 / _0x1cc777; }
-  };
   const _0x5179a4 = Date.now();
   let _0x2a4ea5 = Infinity;
   
   for (const _0x58005c of workers){
     if (_0x58005c.blockedUntil > _0x5179a4) {
-      _0x2a4ea5 = Math.min(_0x2a4ea5, _0x9b094f.Kjchp(_0x58005c.blockedUntil, _0x5179a4));
+      _0x2a4ea5 = Math.min(_0x2a4ea5, _0x58005c.blockedUntil - _0x5179a4);
     }
   
-    return Number.isFinite(_0x2a4ea5) ? Math.max(1, Math.min(3600, Math.ceil(_0x9b094f.xBiIz(_0x2a4ea5, 1000)))) : 30;
+    return Number.isFinite(_0x2a4ea5) ? Math.max(1, Math.min(3600, Math.ceil(_0x2a4ea5 / 1000))) : 30;
   }
 }
 
-const QUOTA_RE =/error\x20*code:?\x20*1027|error\x20*1027|daily request limit|exceeded[^.]{0,40}(free|daily)[^.]{0,40}(limit|tier|quota)/i;
-const RATE_RE = /error\x20*code:?\x20*1015|error\x20*1015|you are being rate limited/i;
-const WERR_RE = /error\x20*code:?\x20*110[12]|error\x20*110[12]|worker threw exception|exceeded resource limits/i;
+const QUOTA_RE =/error *code:? *1027|error *1027|daily request limit|exceeded[^.]{0,40}(free|daily)[^.]{0,40}(limit|tier|quota)/i;
+const RATE_RE = /error *code:? *1015|error *1015|you are being rate limited/i;
+const WERR_RE = /error *code:? *110[12]|error *110[12]|worker threw exception|exceeded resource limits/i;
 
-function classify(_0x4beeb3, _0x4295ef) {
-  const _0x4394c3 = {
-    'DxXAa': 'quota',
-    'ffZVJ': 'rate',
-    'qnvsv': 'workererr'
-  };
-  
+function classify(_0x4beeb3, _0x4295ef) {  
   if (!PEEK_STATUS.has(_0x4beeb3)) return null;
   
   const _0x5d8a5a = _0x4295ef.toString('utf8', 0, 4096);
   
-  if (QUOTA_RE.test(_0x5d8a5a)) return _0x4394c3.DxXAa;
-  if (RATE_RE.test(_0x5d8a5a)) return _0x4394c3.ffZVJ;
-  if (WERR_RE.test(_0x5d8a5a)) return _0x4394c3.qnvsv;
+  if (QUOTA_RE.test(_0x5d8a5a)) return 'quota';
+  if (RATE_RE.test(_0x5d8a5a)) return 'rate';
+  if (WERR_RE.test(_0x5d8a5a)) return 'workererr';
   
   return null;
 }
@@ -1318,11 +1284,6 @@ const requestListener = (_0x2c62ec, _0x597c3c) => {
     if (!_0x597c3c.headersSent) sendText(_0x597c3c, 502, 'Proxy Error');
     else try {
       _0x597c3c.destroy();
-      else return (
-        _0x529421.delete(_0x2092e5),
-        _0x3ea322 -= _0x49bf43.size,
-        null
-      )
     } catch (_0x38f7d2) {}
   });
 };
