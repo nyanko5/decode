@@ -161,99 +161,25 @@ function classify(_0x4beeb3, _0x4295ef) {
 
 const shareKey = _0x456ea4 => 'wproxy:block:' + _0x456ea4.url.host;
 
-async function rest(_0x1354b4) {
-  const _0x4111fd = {
-    'rGiFr': 'shared',
-    'bocAp': 'HIT',
-    'mzCdX': function(_0x544b82, _0x581429) { return _0x544b82(_0x581429); },
-    'foXIt': function(_0x3d300d, _0x17d735) { return _0x3d300d / _0x17d735; },
-    'IOlzU': 'if-none-match',
-    'VowvM': function(_0x4aec3c, _0x6501aa) { return _0x4aec3c === _0x6501aa; },
-    'FJIfy': 'cache-control',
-    'ySSXu': 'if-modified-since',
-    'sgWmU': 'last-modified',
-    'qZYrc': function(_0x2034f4, _0x201b28) { return _0x2034f4 === _0x201b28; },
-    'BSGSy': 'content-length',
-    'nDBgu': function(_0x46b3c0, _0x42f8d1) { return _0x46b3c0(_0x42f8d1); },
-    'cnzqX': function(_0x2094f2, _0x4778d4) { return _0x2094f2 === _0x4778d4; },
-    'tQNCm': 'nhRUp',
-    'bwNgk': 'EXWWX',
-    'heouY': function(_0x1fc36d, _0x3645d0, _0x5875a9) { return _0x1fc36d(_0x3645d0, _0x5875a9); },
-    'cXken': function(_0x2e6aa6, _0x1f7a8c, _0x899ed5) { return _0x2e6aa6(_0x1f7a8c, _0x899ed5); },
-    'APHHa': function(_0x37b77b, _0x2aca08) { return _0x37b77b + _0x2aca08; },
-    'VwzFr': function(_0x5ad9c3, _0xc91cdf) { return _0x5ad9c3 + _0xc91cdf; },
-    'ysyOq': 'Bearer',
-    'rlIuU': 'guBCg',
-    'nOPNq': 'VNLzq'
-  };
-  
+async function rest(_0x1354b4) {  
   if (!REDIS_URL) return null;
   
   try {
-    if (_0x4111fd['tQNCm'] === _0x4111fd.bwNgk) {
-      _0x2d3dc0.blockedUntil = _0x25ce83;
-      _0xe3a36d.reason = _0x4111fd.rGiFr;
-    } else {
-      const _0x4a4c3f = new AbortController();
-      const _0x10eaea = _0x4111fd.heouY(setTimeout, () => _0x4a4c3f.abort(), 1500);
-      const _0x131c34 = await _0x4111fd.cXken(fetch, _0x4111fd.APHHa(REDIS_URL, _0x1354b4), {
-        'headers': {
-          'Authorization': _0x4111fd.VwzFr(_0x4111fd.ysyOq, REDIS_TOKEN)
-        },
-        'signal': _0x4a4c3f.signal
-      });
-      
-      return (
-        _0x4111fd.mzCdX(clearTimeout, _0x10eaea),
-        await _0x131c34.json()
-      )
-    }
+    const _0x4a4c3f = new AbortController();
+    const _0x10eaea = setTimeout(() => _0x4a4c3f.abort(), 1500);
+    const _0x131c34 = await fetch(REDIS_URL + _0x1354b4, {
+      'headers': {
+        'Authorization': 'Bearer' + REDIS_TOKEN
+      },
+      'signal': _0x4a4c3f.signal
+    });
+    
+    return (
+      clearTimeout(_0x10eaea),
+      await _0x131c34.json()
+    )
   } catch (_0x29bbda) {
-    if (_0x4111fd.qZYrc(_0x4111fd.rlIuU, _0x4111fd.nOPNq)) {
-      const _0x3287a3 = _0x5205c8.assign({}, _0x1081ec.headers, {
-        'x-proxy-cache': _0x4111fd.bocAp,
-        'age': _0x4111fd.mzCdX(_0x4d1958, _0x18f3df.floor(_0x4111fd.foXIt(_0x13a80a.now() - _0xf98f55.at, 1000)))
-      });
-      const _0x1fc144 = _0x525775.headers[_0x4111fd.IOlzU];
-      
-      if (_0x1fc144 && _0x50f834.headers.etag && _0x4111fd.VowvM(_0x1fc144, _0xc0e3b0.headers.etag)) {
-        const _0x3a8b78 = {
-          'etag': _0x495bd9.headers.etag,
-          'x-proxy-cache': _0x4111fd.bocAp
-        };
-        
-        if (_0x561ef6.headers[_0x4111fd.FJIfy]) {
-          _0x3a8b78[_0x4111fd.FJIfy] = _0x197283.headers[_0x4111fd.FJIfy];
-        }
-        
-        _0x33af8b.writeHead(304, _0x3a8b78);
-        _0x120931.end();
-        
-        return;
-      }
-      
-      const _0x4607ca = _0x151ce8.headers[_0x4111fd.ySSXu];
-      
-      if (!_0x1fc144 && _0x4607ca && _0x2af99e.headers[_0x4111fd.sgWmU] && _0x4111fd.qZYrc(_0x4607ca, _0x4e1a58.headers['last-modified'])) {
-        const _0x12cdd1 = {
-          'last-modified': _0x4fa7e1.headers[_0x4111fd.sgWmU],
-          'x-proxy-cache': 'HIT'
-        };
-        
-        if (_0x5cd5b8.headers[_0x4111fd.FJIfy]) {
-          _0x12cdd1[_0x4111fd.FJIfy] = _0x443518.headers[_0x4111fd.FJIfy];
-        }
-        
-        _0x3af5da.writeHead(304, _0x12cdd1);
-        _0x4e1232.end();
-        
-        return;
-      }
-      
-      _0x3287a3[_0x4111fd.BSGSy] = _0x4111fd.nDBgu(_0x3c8c0d, _0x265800.body.length);
-      _0x39fd83.writeHead(_0x19198b.status, _0x3287a3);
-      _0x152b5e.end(_0x4111fd.cnzqX(_0x38e635.method, 'HEAD') ? _0xc38fcb : _0x44bbc7.body);
-    } else return null;
+    return null;
   }
 }
 
