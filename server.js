@@ -52,39 +52,25 @@ for (const s of rawList.split(/[\x20,]+/).map(_0x4eae20 => _0x4eae20.trim().repl
 }
 
 function rollover(_0x3ec273) {
-  const _0x70e52c = {
-    'qiFNO': function(_0x2ef505, _0x2bbe35) { return _0x2ef505 !== _0x2bbe35; },
-    'pwSuj': function(_0xff39fe, _0x5908d7){ return _0xff39fe === _0x5908d7; },
-    'LyaLH': 'quota',
-    'ZcsQY': 'OvnCe',
-    'ngiah': 'HLAxZ'
-  };
   const _0x45b7dc = utcDay();
   
-  if (_0x70e52c.qiFNO(_0x3ec273.day, _0x45b7dc)) {
+  if (_0x3ec273.day !== _0x45b7dc) {
     _0x3ec273.day = _0x45b7dc;
     _0x3ec273.used = 0;
     
-    if (_0x70e52c.pwSuj(_0x3ec273.reason, _0x70e52c.LyaLH)) {
-      _0x70e52c.pwSuj(_0x70e52c.ZcsQY, _0x70e52c.ngiah) ? _0x435b29.end() : (_0x3ec273.blockedUntil = 0, _0x3ec273.reason = '', _0x3ec273.fails = 0)
+    if (_0x3ec273.reason === 'quota') {
+      _0x3ec273.blockedUntil = 0;
+      _0x3ec273.reason = '';
+      _0x3ec273.fails = 0;
     }
   };
 }
 
 function block(_0x3c7f7c, _0x15f983, _0x59b646) {
-  const _0x4ea2ca = {
-    'qauvx': function(_0xb6fc03, _0x5e9b2e) { return _0xb6fc03 + _0x5e9b2e; },
-    'OskGG': function(_0x5bfafb, _0x509694) { return _0x5bfafb + _0x509694; },
-    'XosED': function(_0x2c6a50, _0x508fc2) { return _0x2c6a50 + _0x508fc2; },
-    'Uqrgr': function(_0x430ba8, _0x4f9256) { return _0x430ba8 + _0x4f9256; },
-    'PPnNd': function(_0x203a01, _0x599fb3) { return _0x203a01 + _0x599fb3; },
-    'htozH': '[worker#',
-    'YjECA': function(_0x790d02, _0x326dd0) { return _0x790d02(_0x326dd0)}
-  };
-  _0x3c7f7c.blockedUntil = _0x4ea2ca.qauvx(Date.now(), _0x15f983);
+  _0x3c7f7c.blockedUntil = Date.now() + _0x15f983;
   _0x3c7f7c.reason = _0x59b646;
   
-  console.log(_0x4ea2ca.qauvx(_0x4ea2ca.OskGG(_0x4ea2ca.XosED(_0x4ea2ca.OskGG(_0x4ea2ca.OskGG(_0x4ea2ca.Uqrgr(_0x4ea2ca.PPnNd(_0x4ea2ca.XosED(_0x4ea2ca.htozH,　_0x3c7f7c.id),　'] 停止'),　_0x59b646),　'\x20→\x20'), new Date(_0x3c7f7c.blockedUntil).toISOString()), '\x20('), _0x4ea2ca.YjECA(jst, _0x3c7f7c.blockedUntil)), ')'));
+  console.log(`[worker#${_0x3c7f7c.id}] 停止${_0x59b646}\ →\ ${new Date(_0x3c7f7c.blockedUntil).toISOString()} (${jst(_0x3c7f7c.blockedUntil)})`);
 }
 
 function markOk(_0x76f179) {
@@ -94,13 +80,11 @@ function markOk(_0x76f179) {
 function markFail(_0x246637, _0x1b6590) {
   const _0x5c0ee9 = {
     'iIdBz': function(_0x489178, _0x1ffa28) { return _0x489178 >= _0x1ffa28; },
-    'NlpfQ': function(_0x278df3, _0xd4659b, _0x15c344, _0x494013) { return _0x278df3(_0xd4659b, _0x15c344, _0x494013); },
-    'xwHRX': function(_0x5cae77, _0x5a9b91) { return _0x5cae77 - _0x5a9b91; }
   };
   
   _0x246637.fails++;
   
-  if (_0x5c0ee9.iIdBz(_0x246637.fails, 2)) _0x5c0ee9.NlpfQ(block, _0x246637, Math.min(15000 * Math.pow(2, _0x5c0ee9.xwHRX(_0x246637.fails, 2)), 300000), _0x1b6590);
+  if (_0x5c0ee9.iIdBz(_0x246637.fails, 2)) block(_0x246637, Math.min(15000 * Math.pow(2, _0x246637.fails - 2), 300000), _0x1b6590);
 }
 
 async function applyKind(_0x24bc09, _0xf3df15) {
@@ -146,26 +130,19 @@ async function applyKind(_0x24bc09, _0xf3df15) {
 
 function pick(_0x559529) {
   const _0x128bd8 = {
-    'qgvBq': function(_0x492222, _0x49ab5a) { return _0x492222 !== _0x49ab5a; },
-    'mltQO': 'VYTce',
-    'rTuUG': 'rtyzG',
-    'sYrnW': function(_0xa5de69, _0x3016f1) { return _0xa5de69(_0x3016f1); },
-    'OwMmU': function(_0x5b2cba, _0x327aba){ return _0x5b2cba > _0x327aba; }
+    'OwMmU': function(_0x5b2cba, _0x327aba) { return _0x5b2cba > _0x327aba; }
   };
+  
   const _0x6d8fa5 = Date.now();
   const _0x11bdf5 = [];
   
   for (const _0x18b637 of workers) {
+    rollover(_0x18b637);
     
-    if (_0x128bd8.qgvBq(_0x128bd8.mltQO, _0x128bd8.rTuUG)) {
-      _0x128bd8.sYrnW(rollover, _0x18b637);
-      
-      if (_0x559529 && _0x559529.has(_0x18b637.id)) continue;
-      if (_0x128bd8.OwMmU(_0x18b637.blockedUntil, _0x6d8fa5)) continue;
-      
-      _0x11bdf5.push(_0x18b637);
+    if (_0x559529 && _0x559529.has(_0x18b637.id)) continue;
+    if (_0x128bd8.OwMmU(_0x18b637.blockedUntil, _0x6d8fa5)) continue;
     
-    } else _0x46bffc.push();
+    _0x11bdf5.push(_0x18b637);
   }
   
   if (!_0x11bdf5.length) return null;
@@ -725,34 +702,20 @@ function attempt(_0x4b9a72, _0x1f4728) {
   });
 }
 
-function sendText(_0x123509, _0x4832ca, _0x29ed62, _0x30f989) {
-  const _0x5923a8 = {
-    'kclZl': function(_0x400c2c, _0x2aedc0) { return _0x400c2c === _0x2aedc0; },
-    'QXuUq': 'rPtkP',
-    'FGHSA': 'utf8',
-    'fgOHy': 'text/plain; charset=utf-8',
-    'vRreu': 'no-store'
-  };
-  
+function sendText(_0x123509, _0x4832ca, _0x29ed62, _0x30f989) {  
   if (_0x123509.headersSent) {
-    if (_0x5923a8.kclZl(_0x5923a8.QXuUq, _0x5923a8.QXuUq)) {
-      try {
-        _0x123509.end();
-      } catch (_0x4d4d19) {}
-      
-      return;
-    } else {
-      if (!_0x233ce4(_0x1eae89)) {
-        _0x50444a[_0x57c61b] = _0x6586db.headers[_0x27c91c];
-      }
-    }
+    try {
+      _0x123509.end();
+    } catch (_0x4d4d19) {}
+    
+    return;
   }
   
-  const _0x3af457 = Buffer.from(_0x29ed62, _0x5923a8.FGHSA);
+  const _0x3af457 = Buffer.from(_0x29ed62, 'utf8');
   _0x123509.writeHead(_0x4832ca, Object.assign({
-    'content-type': _0x5923a8.fgOHy,
+    'content-type': 'text/plain; charset=utf-8',
     'content-length': String(_0x3af457.length),
-    'cache-control': _0x5923a8.vRreu
+    'cache-control': 'no-store'
   }, _0x30f989 || {}));
   _0x123509.end(_0x3af457);
 }
@@ -1348,20 +1311,13 @@ async function handle(_0x3ceaeb, _0x26c461) {
   return _0xbdb751.WEEcA(sendBusy, _0x26c461);
 }
 
-const requestListener = (_0x2c62ec, _0x597c3c) => {
-  const _0x51c460 = {
-    'WrhhG': function(_0x145bc3, _0x32953e, _0x44f53e, _0x1a410e) { return _0x145bc3(_0x32953e, _0x44f53e, _0x1a410e); },
-    'bgZac': 'Proxy Error',
-    'muewO': 'SBDWW',
-    'AlOYe': 'jBriU'
-  };
-  
+const requestListener = (_0x2c62ec, _0x597c3c) => {  
   handle(_0x2c62ec, _0x597c3c).catch(_0x12af1a => {
     console.error('[handle]', _0x12af1a && _0x12af1a.message);
     
-    if (!_0x597c3c.headersSent) _0x51c460.WrhhG(sendText, _0x597c3c, 502, _0x51c460.bgZac);
+    if (!_0x597c3c.headersSent) sendText(_0x597c3c, 502, 'Proxy Error');
     else try {
-      if (_0x51c460.muewO !== _0x51c460.AlOYe) _0x597c3c.destroy();
+      _0x597c3c.destroy();
       else return (
         _0x529421.delete(_0x2092e5),
         _0x3ea322 -= _0x49bf43.size,
@@ -1389,17 +1345,7 @@ if (require.main === module) {
   server.keepAliveTimeout = 65000;
   server.headersTimeout = 66000;
   server.listen(PORT, '0.0.0.0', () => {
-    const _0x28f6db = {
-      'ECHFT': function(_0x548bbd, _0x3510cb) { return _0x548bbd + _0x3510cb; },
-      'GMimx': function(_0x5ec607, _0x23cf27) { return _0x5ec607 + _0x23cf27; },
-      'NopfU' :function(_0x1d7f92, _0x46cd2a) { return _0x1d7f92 + _0x46cd2a; },
-      'BUQzD': '[proxy] listening on :',
-      'cMKKt': '\x20/\x20workers=',
-      'dlutY': '\x20/\x20reset=UTC\x20',
-      'cQShq': ':00\x20(日本時間\x20',
-    };
-    
-    console.log(_0x28f6db.ECHFT(_0x28f6db.GMimx(_0x28f6db.GMimx(_0x28f6db.ECHFT(_0x28f6db.ECHFT(_0x28f6db.NopfU(_0x28f6db.NopfU(_0x28f6db.BUQzD, PORT), _0x28f6db.cMKKt), workers.length) + _0x28f6db.dlutY, RESET_OFFSET / 3600000), _0x28f6db.cQShq), (((RESET_OFFSET / 3600000) + 9) % 24)), ':00)'));
+    console.log('[proxy] listening on :' + PORT + ' / workers=' + workers.length + ' / reset=UTC ' + RESET_OFFSET / 3600000 + ':00 (日本時間 ' + RESET_OFFSET / 3600000 + 9 % 24 + ':00)');
   });
   server.on('clientError', (_0x3af7ba, _0x11de11) => {
     try {
