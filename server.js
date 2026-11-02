@@ -1,73 +1,13 @@
-/*
-const a0_0x59777e = (function() {
-    let _0x422cd9 = true;
-    
-    return function(_0x53351b, _0x2657d3) {
-      const _0x30d177 = _0x422cd9 ? function(){
-        if (_0x2657d3) {
-          const _0x242d3a = _0x2657d3.apply(_0x53351b, arguments);
-          _0x2657d3 = null
-          
-          return _0x242d3a;
-        }
-      } : function() {};
-  
-      _0x422cd9 = false
-      
-      return _0x30d177;
-    };
-  }())
-  
-  const a0_0x1a0a37 = a0_0x59777e(this, function() {
-    const _0x2f5c80 = {
-      'ngNKk': 'last-modified',
-      'hjVjc': 'HIT',
-      'etrYW': 'cache-control',
-      'ppORj': function(_0x42cb33, _0x12b037) { return _0x42cb33 !== _0x12b037; },
-      'yXBfh': function(_0x153236, _0x38685f) { return _0x153236 !== _0x38685f; },
-      'WBAzE': "WdMjv",
-      'maULq': 'DFBBS',
-      'iUpDJ': '(((.+)+)+)+$'
-    };
-    
-    if (_0x2f5c80.ppORj(a0_0x1a0a37.bind().toString().indexOf('\x0a'), -1)) {
-      if (_0x2f5c80.yXBfh(_0x2f5c80.WBAzE, _0x2f5c80.maULq)) return;
-      else {
-        const _0x31ce8c = {
-          'last-modified': _0x42c38c.headers[_0x2f5c80.ngNKk],
-          'x-proxy-cache': _0x2f5c80.hjVjc
-        };
-        
-        if (_0x1e5967.headers[_0x2f5c80.etrYW]) {
-          _0x31ce8c["cache-control"] = _0x18c179.headers[_0x2f5c80.etrYW];
-        }
-        
-        _0x43adae.writeHead(304, _0x31ce8c);
-        _0x25659f.end();
-        
-        return;
-      }
-    }
-    
-    return a0_0x1a0a37.toString().search(_0x2f5c80.iUpDJ).toString().constructor(a0_0x1a0a37).search('(((.+)+)+)+$');
-  });
-  
-  a0_0x1a0a37();
-*/
 'use strict';
 
 const http = require('http');
 const https = require('https');
 const { URL } = require('url');
 const env = process.env;
-const num = (_0x47b474, _0x2cdef1) => {
-  const _0x4e88f5 = {
-    'eTJFR': function(_0x221abe, _0xaf5d14) { return _0x221abe !== _0xaf5d14; }
-  };
-  
+const num = (_0x47b474, _0x2cdef1) => {  
   const _0x5cff89 = Number(_0x47b474);
   
-  return _0x4e88f5.eTJFR(_0x47b474, undefined) && _0x4e88f5.eTJFR(_0x47b474, '') && Number.isFinite(_0x5cff89) ? _0x5cff89 : _0x2cdef1;
+  return Number.isFinite(_0x5cff89) ? _0x5cff89 : _0x2cdef1;
 };
 
 const DEFAULT_WORKERS = ['https://api-tool.nemu0001.workers.dev/', 'https://api-tool.nemu01.workers.dev', 'https://api-tool.myproxy0109.workers.dev', 'https://api-tool.myproxy0109.workers.dev/'];
@@ -1457,11 +1397,9 @@ if (require.main === module) {
       'cMKKt': '\x20/\x20workers=',
       'dlutY': '\x20/\x20reset=UTC\x20',
       'cQShq': ':00\x20(日本時間\x20',
-      'ZeiHl': function(_0x51c852, _0x143bf3) { return _0x51c852 % _0x143bf3;},
-      'xCwLo': function(_0x52a4c5, _0x3f8811) { return _0x52a4c5 / _0x3f8811; }
     };
     
-    console.log(_0x28f6db.ECHFT(_0x28f6db.GMimx(_0x28f6db.GMimx(_0x28f6db.ECHFT(_0x28f6db.ECHFT(_0x28f6db.NopfU(_0x28f6db.NopfU(_0x28f6db.BUQzD, PORT), _0x28f6db.cMKKt), workers.length) + _0x28f6db.dlutY, RESET_OFFSET / 3600000), _0x28f6db.cQShq), _0x28f6db.ZeiHl(_0x28f6db.NopfU(_0x28f6db.xCwLo(RESET_OFFSET, 3600000), 9), 24)), ':00)'));
+    console.log(_0x28f6db.ECHFT(_0x28f6db.GMimx(_0x28f6db.GMimx(_0x28f6db.ECHFT(_0x28f6db.ECHFT(_0x28f6db.NopfU(_0x28f6db.NopfU(_0x28f6db.BUQzD, PORT), _0x28f6db.cMKKt), workers.length) + _0x28f6db.dlutY, RESET_OFFSET / 3600000), _0x28f6db.cQShq), (((RESET_OFFSET / 3600000) + 9) % 24)), ':00)'));
   });
   server.on('clientError', (_0x3af7ba, _0x11de11) => {
     try {
@@ -1477,12 +1415,7 @@ if (require.main === module) {
   process.on('SIGINT', stop);
   process.on('unhandledRejection', _0xa2a9ec => console.error('[unhandledRejection]', _0xa2a9ec && _0xa2a9ec.message));
   process.on('uncaughtException', _0x258272 => console.error('[uncaughtException]', _0x258272 && _0x258272.message));
-  env.KEEP_ALIVE === '1' && env.RENDER_EXTERNAL_URL && setInterval(() => {
-    const _0x4b3116 = {
-      'efMpR': '/_proxy/health',
-      'LpyCN': 'error'
-    };
-    
-    https.get(env.RENDER_EXTERNAL_URL.replace(/\/+$/,'') + _0x4b3116.efMpR, _0x2791b1 => _0x2791b1.resume()).on(_0x4b3116.LpyCN, () => {});
+  env.KEEP_ALIVE === '1' && env.RENDER_EXTERNAL_URL && setInterval(() => {    
+    https.get(env.RENDER_EXTERNAL_URL.replace(/\/+$/,'') + '/_proxy/health', _0x2791b1 => _0x2791b1.resume()).on('error', () => {});
   }, 10 * 60 * 1000).unref();
 }
