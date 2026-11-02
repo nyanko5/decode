@@ -330,23 +330,23 @@ function attempt(_0x4b9a72, _0x1f4728) {
         }),
         'agent': _0x349671 ? httpAgent : httpsAgent
       },
-      _0x23f22f => {
+      res => {
         clearTimeout(_0xb53ec0);
-        const _0x490f3c = _0x23f22f.statusCode;
-        const _0x19af27 = Number(_0x23f22f.headers['content-length']);
+        const _0x490f3c = res.statusCode;
+        const _0x19af27 = Number(res.headers['content-length']);
         
         if (PEEK_STATUS.has(_0x490f3c) && Number.isFinite(_0x19af27) && _0x19af27 <= PEEK_MAX) {
           const _0x6273eb = [];
-          _0x23f22f.on('data', _0x118f2c => _0x6273eb.push(_0x118f2c));
-          _0x23f22f.on('end', () => {
+          res.on('data', _0x118f2c => _0x6273eb.push(_0x118f2c));
+          res.on('end', () => {
             const _0x4cd5c0 = Buffer.concat(_0x6273eb);
             _0x13ef3e({
-              'upRes': _0x23f22f,
+              'upRes': res,
               'body': _0x4cd5c0,
               'kind': classify(_0x490f3c, _0x4cd5c0)
             });
           });
-          _0x23f22f.on('error', () => _0x13ef3e({
+          res.on('error', () => _0x13ef3e({
             'error': 'ECONNRESET'
           }));
           
@@ -354,7 +354,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
         }
         
         _0x13ef3e({
-          'upRes': _0x23f22f
+          'upRes': res
         });
       }
     );
@@ -367,7 +367,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
     req.on('error', _0x491320 => _0x13ef3e({
       'error': _0x491320 && _0x491320.code || 'ERROR'
     }));
-    _0x1f4728.cancel = () => req.destroy(); };
+    _0x1f4728.cancel = () => req.destroy();
     if (_0x1f4728.body && _0x1f4728.body.length) {
       req.end(_0x1f4728.body);
     }
