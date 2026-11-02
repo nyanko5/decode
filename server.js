@@ -319,7 +319,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
           _0x1b4755(_0xfe12af);
         }
     };
-    const _0x584c5c = (_0x349671 ? http : https).request(
+    const req = (_0x349671 ? http : https).request(
       {
         'hostname': _0x4b9a72.url.hostname,
         'port': _0x4b9a72.url.port || (_0x349671 ? 80 : 443),
@@ -364,41 +364,41 @@ function attempt(_0x4b9a72, _0x1f4728) {
     );
     
     _0xb53ec0 = setTimeout(() => {      
-      _0x584c5c.destroy(Object.assign(new Error('header timeout'), {
+      req.destroy(Object.assign(new Error('header timeout'), {
         'code': 'EHDRTIMEOUT'
       }));
     } , HEADER_TIMEOUT);
-    _0x584c5c.on('error', _0x491320 => _0x13ef3e({
+    req.on('error', _0x491320 => _0x13ef3e({
       'error': _0x491320 && _0x491320.code || 'ERROR'
     }));
     _0x1f4728.cancel = () => {      
       try {
-        _0x584c5c.destroy();
+        req.destroy();
       } catch (_0x1817ac) {} };
     if (_0x1f4728.body && _0x1f4728.body.length) {
-      _0x584c5c.end(_0x1f4728.body);
+      req.end(_0x1f4728.body);
     }
     
-    else _0x584c5c.end();
+    else req.end();
   });
 }
 
-function sendText(_0x123509, _0x4832ca, _0x29ed62, _0x30f989) {
-  if (_0x123509.headersSent) {
+function sendText(res, _0x4832ca, _0x29ed62, _0x30f989) {
+  if (res.headersSent) {
     try {
-      _0x123509.end();
+      res.end();
     } catch (_0x4d4d19) {}
     
     return;
   }
   
-  const _0x3af457 = Buffer.from(_0x29ed62, 'utf8');
-  _0x123509.writeHead(_0x4832ca, Object.assign({
+  const buf = Buffer.from(_0x29ed62, 'utf8');
+  res.writeHead(_0x4832ca, Object.assign({
     'content-type': 'text/plain; charset=utf-8',
-    'content-length': String(_0x3af457.length),
+    'content-length': String(buf.length),
     'cache-control': 'no-store'
   }, _0x30f989 || {}));
-  _0x123509.end(_0x3af457);
+  res.end(buf);
 }
 
 function sendBusy(_0x3df449) {
@@ -780,13 +780,13 @@ async function handle(_0x3ceaeb, _0x26c461) {
   return sendBusy(_0x26c461);
 }
 
-const requestListener = (_0x2c62ec, _0x597c3c) => {  
-  handle(_0x2c62ec, _0x597c3c).catch(_0x12af1a => {
+const requestListener = (_0x2c62ec, res) => {  
+  handle(_0x2c62ec, res).catch(_0x12af1a => {
     console.error('[handle]', _0x12af1a && _0x12af1a.message);
     
-    if (!_0x597c3c.headersSent) sendText(_0x597c3c, 502, 'Proxy Error');
+    if (!res.headersSent) sendText(res, 502, 'Proxy Error');
     else try {
-      _0x597c3c.destroy();
+      res.destroy();
     } catch (_0x38f7d2) {}
   });
 };
