@@ -308,7 +308,7 @@ const httpAgent = new http.Agent({
 });
 
 function attempt(_0x4b9a72, _0x1f4728) {
-  return new Promise(_0x1b4755 => {  
+  return new Promise(_0x1b4755 => {
     const _0x349671 = _0x4b9a72.url.protocol === 'http:';
     let _0x3d2a1d = false;
     let _0xb53ec0 = null;
@@ -337,7 +337,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
         
         if (PEEK_STATUS.has(_0x490f3c) && Number.isFinite(_0x19af27) && _0x19af27 <= PEEK_MAX) {
           const _0x6273eb = [];
-          res.on('data', _0x118f2c => _0x6273eb.push(_0x118f2c));
+          res.on('data', chunk => _0x6273eb.push(chunk));
           res.on('end', () => {
             const _0x4cd5c0 = Buffer.concat(_0x6273eb);
             _0x13ef3e({
@@ -364,10 +364,11 @@ function attempt(_0x4b9a72, _0x1f4728) {
         'code': 'EHDRTIMEOUT'
       }));
     } , HEADER_TIMEOUT);
-    req.on('error', _0x491320 => _0x13ef3e({
-      'error': _0x491320 && _0x491320.code || 'ERROR'
+    req.on('error', error => _0x13ef3e({
+      'error': error && error.code || 'ERROR'
     }));
     _0x1f4728.cancel = () => req.destroy();
+    
     if (_0x1f4728.body && _0x1f4728.body.length) {
       req.end(_0x1f4728.body);
     } else req.end();
@@ -466,15 +467,15 @@ function sendUpstream(_0x26eaab, res, _0x5810cd, _0x1c7edd) {
   }
   
   _0x124e4b.pipe(res);
-  _0x167218 && (_0x124e4b.on('data', _0x21ff56 => {    
+  _0x167218 && (_0x124e4b.on('data', chunk => {    
     if (!_0x167218.ok) return;
     
-    _0x167218.size += _0x21ff56.length;
+    _0x167218.size += chunk.length;
     
     if (_0x167218.size > CACHE_ITEM_MAX) {
       _0x167218.ok = false;
       _0x167218.chunks = null;
-    } else _0x167218.chunks.push(_0x21ff56);
+    } else _0x167218.chunks.push(chunk);
   }),
   _0x124e4b.on('end', () => {
     _0x167218.ok && !_0x124e4b.aborted && cacheSet(_0x1c7edd, {
