@@ -308,7 +308,7 @@ const httpAgent = new http.Agent({
 });
 
 function attempt(_0x4b9a72, _0x1f4728) {
-  return new Promise(_0x1b4755 => {
+  return new Promise(resolve => {
     const _0x349671 = _0x4b9a72.url.protocol === 'http:';
     let _0x3d2a1d = false;
     let _0xb53ec0 = null;
@@ -316,7 +316,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
         if (!_0x3d2a1d) {
           _0x3d2a1d = true;
           clearTimeout(_0xb53ec0);
-          _0x1b4755(_0xfe12af);
+          resolve(_0xfe12af);
         }
     };
     const req = (_0x349671 ? http : https).request(
