@@ -771,7 +771,7 @@ if (require.main === module) {
   server.listen(PORT, '0.0.0.0', () => {
     console.log('[proxy] listening on :' + PORT + ' / workers=' + workers.length + ' / reset=UTC ' + RESET_OFFSET / 3600000 + ':00 (日本時間 ' + RESET_OFFSET / 3600000 + 9 % 24 + ':00)');
   });
-  server.on('clientError', (_0x3af7ba, _0x11de11) => _0x11de11.destroy(); );
+  server.on('clientError', (req, res) => res.destroy());
   
   const stop = () => {    
     server.close(() => process.exit(0));
