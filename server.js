@@ -307,7 +307,7 @@ const httpAgent = new http.Agent({
   'scheduling': 'lifo'
 });
 
-function attempt(_0x4b9a72, _0x1f4728) { 
+function attempt(_0x4b9a72, _0x1f4728) {
   return new Promise(_0x1b4755 => {  
     const _0x349671 = _0x4b9a72.url.protocol === 'http:';
     let _0x3d2a1d = false;
@@ -370,18 +370,13 @@ function attempt(_0x4b9a72, _0x1f4728) {
     _0x1f4728.cancel = () => req.destroy();
     if (_0x1f4728.body && _0x1f4728.body.length) {
       req.end(_0x1f4728.body);
-    }
-    
-    else req.end();
+    } else req.end();
   });
 }
 
 function sendText(res, _0x4832ca, _0x29ed62, _0x30f989) {
-  if (res.headersSent) res.end();
+  if (res.headersSent) return res.end();
     
-    return;
-  }
-  
   const buf = Buffer.from(_0x29ed62, 'utf8');
   res.writeHead(_0x4832ca, Object.assign({
     'content-type': 'text/plain; charset=utf-8',
