@@ -339,16 +339,12 @@ function attempt(_0x4b9a72, _0x1f4728) {
           const _0x6273eb = [];
           _0x23f22f.on('data', _0x118f2c => _0x6273eb.push(_0x118f2c));
           _0x23f22f.on('end', () => {
-            if ('wPIuK' === 'bsWSf') {
-              _0x4db7b7.destroy();
-            } else {
-              const _0x4cd5c0 = Buffer.concat(_0x6273eb);
-              _0x13ef3e({
-                'upRes': _0x23f22f,
-                'body': _0x4cd5c0,
-                'kind': classify(_0x490f3c, _0x4cd5c0)
-              });
-            }
+            const _0x4cd5c0 = Buffer.concat(_0x6273eb);
+            _0x13ef3e({
+              'upRes': _0x23f22f,
+              'body': _0x4cd5c0,
+              'kind': classify(_0x490f3c, _0x4cd5c0)
+            });
           });
           _0x23f22f.on('error', () => _0x13ef3e({
             'error': 'ECONNRESET'
