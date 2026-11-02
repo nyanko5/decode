@@ -28,7 +28,7 @@ const rawList = env.CF_WORKER_URLS && env.CF_WORKER_URLS.trim() ? env.CF_WORKER_
 const RESET_OFFSET = (num(env.RESET_UTC_HOUR, 0) % 24 + 24) % 24 * 3600000;
 const utcDay = () => Math.floor((Date.now() - RESET_OFFSET) / 86400000);
 const nextUtcMidnight = () => (utcDay() + 1) * 86400000 + RESET_OFFSET;
-const jst = _0x56a41e => new Date(_0x56a41e + 9 * 3600000).toISOString().replace('T','\x20').slice(0, 16) + JST;
+const jst = _0x56a41e => new Date(_0x56a41e + 9 * 3600000).toISOString().replace('T',' ').slice(0, 16) + JST;
 const workers = [];
 
 for (const s of rawList.split(/[ ,]+/).map(_0x4eae20 => _0x4eae20.trim().replace(/\/+$/,'')).filter(Boolean)) {
@@ -46,7 +46,7 @@ for (const s of rawList.split(/[ ,]+/).map(_0x4eae20 => _0x4eae20.trim().replace
       'reason': '',
       'fails': 0
     });
-  } catch (a0_0x5a7e06) {
+  } catch (error) {
     console.warn('[config] 無効な Worker URL を無視:' + s);
   }
 }
@@ -170,7 +170,7 @@ async function rest(_0x1354b4) {
       clearTimeout(_0x10eaea),
       await _0x131c34.json()
     )
-  } catch (_0x29bbda) {
+  } catch (error) {
     return null;
   }
 }
@@ -367,10 +367,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
     req.on('error', _0x491320 => _0x13ef3e({
       'error': _0x491320 && _0x491320.code || 'ERROR'
     }));
-    _0x1f4728.cancel = () => {      
-      try {
-        req.destroy();
-      } catch (_0x1817ac) {} };
+    _0x1f4728.cancel = () => req.destroy(); };
     if (_0x1f4728.body && _0x1f4728.body.length) {
       req.end(_0x1f4728.body);
     }
@@ -380,10 +377,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
 }
 
 function sendText(res, _0x4832ca, _0x29ed62, _0x30f989) {
-  if (res.headersSent) {
-    try {
-      res.end();
-    } catch (_0x4d4d19) {}
+  if (res.headersSent) res.end();
     
     return;
   }
@@ -397,12 +391,8 @@ function sendText(res, _0x4832ca, _0x29ed62, _0x30f989) {
   res.end(buf);
 }
 
-function sendBusy(_0x3df449) {
-  if (_0x3df449.headersSent) {
-    try {
-      _0x3df449.end();
-    } catch (_0x1982af) {} return;
-  }
+function sendBusy(res) {
+  if (res.headersSent) return res.end();  
   
   const _0x27f891 = `
   <!doctype html>
@@ -416,36 +406,17 @@ function sendBusy(_0x3df449) {
       </div>
     </body>
     `;
-  const _0x1aa3b9 = Buffer.from(_0x27f891, 'utf8'); 
-  _0x3df449.writeHead(503, {
+  const buf = Buffer.from(_0x27f891, 'utf8'); 
+  res.writeHead(503, {
     'content-type': 'text/html; charset=utf-8',
-    'content-length': String(_0x1aa3b9.length),
+    'content-length': String(buf.length),
     'retry-after': String(soonestRetrySec(soonestRetrySec)),
     'cache-control': 'no-store'
   });
-  _0x3df449.end(_0x1aa3b9);
+  res.end(buf);
 }
 
-function sendUpstream(_0x26eaab, _0x3e74be, _0x5810cd, _0x1c7edd) {
-  const _0xa56100 = {
-    'blJkV': 'EJNXc',
-    'ICnUo': function(_0x2f0230, _0x1fc220, _0x2d5e79) { return _0x2f0230(_0x1fc220, _0x2d5e79);},
-    'shegU': function(_0x586a0e, _0x10b723) { return _0x586a0e + _0x10b723; },
-    'YhCzC': 'content-type',
-    'Gguye': function(_0x477cad, _0x159e7a) { return _0x477cad(_0x159e7a); },
-    'LVAkh': 'cache-control',
-    'HlNev': 'public, max-age=604800, immutable',
-    'PWmUN': 'public, max-age=3600',
-    'MGUXg': function(_0x213ba2, _0x4c3b12) { return _0x213ba2 === _0x4c3b12; },
-    'HxzzD': 'HEAD',
-    'gVCno': function(_0x45cefb, _0x4aea90) { return _0x45cefb === _0x4aea90; },
-    'DQPGg': function(_0x512822, _0x1010a3) { return _0x512822(_0x1010a3); },
-    'GfqVn': function(_0x18d58f, _0x3c0a7c) { return _0x18d58f > _0x3c0a7c; },
-    'IsnGh': function(_0x36ad5c, _0xf1a160) { return _0x36ad5c === _0xf1a160; },
-    'raNsu': 'data',
-    'hnSIo': 'end',
-    'KkDxK': 'aborted'
-  };
+function sendUpstream(_0x26eaab, res, _0x5810cd, _0x1c7edd) {
   const _0x124e4b = _0x5810cd.upRes;
   const _0x3a1143 = _0x124e4b.statusCode;
   const _0x3a5fbd = {};
@@ -456,31 +427,31 @@ function sendUpstream(_0x26eaab, _0x3e74be, _0x5810cd, _0x1c7edd) {
     }
   }
   
-  const _0x4851db = String(_0x3a5fbd[_0xa56100.YhCzC] || '');
-  const _0x208ae3 = _0xa56100.Gguye(String, _0x3a5fbd[_0xa56100.LVAkh] || '');
+  const _0x4851db = String(_0x3a5fbd['content-type'] || '');
+  const _0x208ae3 = String(_0x3a5fbd['cache-control'] || '');
 
   if (!_0x208ae3 && _0x3a1143 === 200 && (STATIC_CT.test(_0x4851db) || /x-icon/i.test(_0x4851db))) {
     if (/[-_.][A-Za-z0-9_-]{8,}\.(?:js|css|woff2?|png|jpe?g|webp|avif|svg)(?:[?#]|$)/.test(_0x26eaab.url || '')) {
-        _0x3a5fbd[_0xa56100.LVAkh] = _0xa56100.HlNev;
+        _0x3a5fbd['cache-control'] = 'public, max-age=604800, immutable';
     } else {
-        _0x3a5fbd[_0xa56100.LVAkh] = _0xa56100.PWmUN;
+        _0x3a5fbd['cache-control'] = 'public, max-age=3600';
     }
 }
   
   if (_0x5810cd.body) {
-    _0x3e74be.writeHead(_0x3a1143, _0x3a5fbd);
-    _0x3e74be.end(_0xa56100.MGUXg(_0x26eaab.method, _0xa56100.HxzzD) ? undefined : _0x5810cd.body);
+    res.writeHead(_0x3a1143, _0x3a5fbd);
+    res.end(_0x26eaab.method === 'HEAD' ? undefined : _0x5810cd.body);
     
     return;
   }
   
   let _0x167218 = null;
   
-  if (_0x1c7edd && _0xa56100.gVCno(_0x3a1143, 200) && !_0x3a5fbd['set-cookie'] && STATIC_CT.test(_0x4851db) && !/no-store|private/i.test(_0x208ae3)) {
-    const _0x31ec2a = _0xa56100.DQPGg(ttlOf, _0x3a5fbd[_0xa56100.LVAkh] || '');
-    const _0x57fbcc = _0xa56100.DQPGg(Number, _0x3a5fbd['content-length']);
+  if (_0x1c7edd && _0x3a1143 === 200 && !_0x3a5fbd['set-cookie'] && STATIC_CT.test(_0x4851db) && !/no-store|private/i.test(_0x208ae3)) {
+    const _0x31ec2a = ttlOf(_0x3a5fbd['cache-control'] || '');
+    const _0x57fbcc = Number(_0x3a5fbd['content-length']);
     
-    if (_0xa56100.GfqVn(_0x31ec2a, 0) && !(Number.isFinite(_0x57fbcc) && _0xa56100.GfqVn(_0x57fbcc,CACHE_ITEM_MAX))) {
+    if (_0x31ec2a > 0 && !(Number.isFinite(_0x57fbcc) && _0x57fbcc > CACHE_ITEM_MAX)) {
       _0x167218 = {
         'chunks': [],
         'size': 0,
@@ -490,17 +461,17 @@ function sendUpstream(_0x26eaab, _0x3e74be, _0x5810cd, _0x1c7edd) {
     }
   }
   
-  _0x3e74be.writeHead(_0x3a1143, _0x3a5fbd);
+  res.writeHead(_0x3a1143, _0x3a5fbd);
   
-  if (_0x26eaab.method === 'HEAD' || _0xa56100.IsnGh(_0x3a1143, 204) || _0xa56100.gVCno(_0x3a1143, 304)) {
+  if (_0x26eaab.method === 'HEAD' || _0x3a1143 === 204 || _0x3a1143 === 304) {
     _0x124e4b.resume();
-    _0x3e74be.end();
+    res.end();
     
     return;
   }
   
-  _0x124e4b.pipe(_0x3e74be);
-  _0x167218 && (_0x124e4b.on(_0xa56100.raNsu, _0x21ff56 => {    
+  _0x124e4b.pipe(res);
+  _0x167218 && (_0x124e4b.on('data', _0x21ff56 => {    
     if (!_0x167218.ok) return;
     
     _0x167218.size += _0x21ff56.length;
@@ -510,24 +481,24 @@ function sendUpstream(_0x26eaab, _0x3e74be, _0x5810cd, _0x1c7edd) {
       _0x167218.chunks = null;
     } else _0x167218.chunks.push(_0x21ff56);
   }),
-  _0x124e4b.on(_0xa56100.hnSIo, () => {
-    _0x167218.ok && !_0x124e4b.aborted && _0xa56100.ICnUo(cacheSet, _0x1c7edd, {
+  _0x124e4b.on('end', () => {
+    _0x167218.ok && !_0x124e4b.aborted && cacheSet(_0x1c7edd, {
       'status': _0x3a1143,
       'headers': _0x3a5fbd,
       'body': Buffer.concat(_0x167218.chunks),
       'at': Date.now(),
-      'exp': _0xa56100.shegU(Date.now(), _0x167218['ttl'])
+      'exp': Date.now() + _0x167218['ttl']
     })
   }));
   _0x124e4b.on('error', () => {
     try {
-      _0x3e74be.destroy();
-    } catch (_0x1cf05b) {}
+      res.destroy();
+    } catch (error) {}
   });
-  _0x124e4b.on(_0xa56100.KkDxK, () => {
+  _0x124e4b.on('aborted', () => {
     try {
-      _0x3e74be.destroy();
-    } catch (_0x272708) {}
+      res.destroy();
+    } catch (error) {}
   });
 }
 
@@ -601,19 +572,19 @@ function readBody(_0x1468fe, _0x2ec702) {
   });
 }
 
-async function handle(_0x3ceaeb, _0x26c461) {
+async function handle(_0x3ceaeb, res) {
   const _0x24411b = _0x3ceaeb.url || '/';
    
-  if (_0x24411b === '/_proxy/health' || _0x24411b === '/_render/health') return sendText(_0x26c461, 200, 'ok');
-  if (_0x24411b === '/robots.txt') return sendText(_0x26c461, 200, 'User-agent: *\nDisallow: /\n', {
+  if (_0x24411b === '/_proxy/health' || _0x24411b === '/_render/health') return sendText(res, 200, 'ok');
+  if (_0x24411b === '/robots.txt') return sendText(res, 200, 'User-agent: *\nDisallow: /\n', {
     'cache-control': 'public,\x20max-age=86400'
   });
   if (/^\/apple-touch-icon(-precomposed|-\d+x\d+)*\.png(\?|$)/['test'](_0x24411b)) {
     return (
-      _0x26c461.writeHead(204, {
+      res.writeHead(204, {
         'cache-control': 'public, max-age=86400'
       }),
-      _0x26c461.end()
+      res.end()
     );
   }
   
@@ -623,8 +594,8 @@ async function handle(_0x3ceaeb, _0x26c461) {
       
       try {
         _0x5399f3 = new URL(_0x24411b, 'http://x').searchParams.get('token') || '';
-      } catch (_0x48c478) {}
-      if (_0x5399f3 !== env.STATUS_TOKEN) return sendText(_0x26c461, 403, 'forbidden');
+      } catch (error) {}
+      if (_0x5399f3 !== env.STATUS_TOKEN) return sendText(res, 403, 'forbidden');
     }
     
     await syncShared();
@@ -654,24 +625,24 @@ async function handle(_0x3ceaeb, _0x26c461) {
     const _0x55772c = Buffer.from(JSON.stringify(_0x2410f4, null, 2));
     
     return (
-      _0x26c461.writeHead(200, {
+      res.writeHead(200, {
       'content-type': 'application/json; charset=utf-8',
       'content-length': String(_0x55772c.length),
       'cache-control': 'no-store'
     }),
-      _0x26c461.end(_0x55772c)
+      res.end(_0x55772c)
     )
   }
   
-  if (_0x24411b[0] !== '/') return sendText(_0x26c461, 400, 'bad request');
+  if (_0x24411b[0] !== '/') return sendText(res, 400, 'bad request');
   if (_0x24411b === '/favicon.ico' && String(env.FAVICON).toLowerCase() !== 'proxy') {
     return (
-      _0x26c461.writeHead(204),
-      _0x26c461.end()
+      res.writeHead(204),
+      res.end()
     )
   }
   
-  if (!workers.length) return sendText(_0x26c461, 500, 'No worker configured');
+  if (!workers.length) return sendText(res, 500, 'No worker configured');
   
   const _0x41951a = /^(GET|HEAD|OPTIONS)$/.test(_0x3ceaeb.method);
   let _0x56dcfa = null;
@@ -683,7 +654,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
     if (_0x122e20) {
       return (
         cacheHits++,
-        serveCached(_0x3ceaeb, _0x26c461, _0x122e20)
+        serveCached(_0x3ceaeb, res, _0x122e20)
       )
     }
     
@@ -695,8 +666,8 @@ async function handle(_0x3ceaeb, _0x26c461) {
   if (!_0x41951a || _0x3ceaeb.method === 'OPTIONS') {
    try {
       _0x5cbec1 = await readBody(_0x3ceaeb, MAX_BODY);
-    } catch (_0x25b493) {
-      return sendText(_0x26c461, _0x25b493.code === 'E2BIG' ? 413 : 400, _0x25b493.code === 'E2BIG' ? 'payload too large' : 'bad request');
+    } catch (error) {
+      return sendText(res, error.code === 'E2BIG' ? 413 : 400, error.code === 'E2BIG' ? 'payload too large' : 'bad request');
     }
   }
   
@@ -709,8 +680,8 @@ async function handle(_0x3ceaeb, _0x26c461) {
     'dead': false
   };
   
-  _0x26c461.on('close', () => {    
-    if (!_0x26c461.writableEnded) {
+  res.on('close', () => {    
+    if (!res.writableEnded) {
       _0x1195a8.dead = true;
       
       if (_0x1195a8.cancel) _0x1195a8.cancel();
@@ -747,7 +718,7 @@ async function handle(_0x3ceaeb, _0x26c461) {
       
       if (_0x41951a || SAFE_ERR.has(_0x5af209.error)) continue;
       
-      return sendText(_0x26c461, 502, 'Proxy Error');
+      return sendText(res, 502, 'Proxy Error');
     }
     if (_0x5af209.kind === 'quota' || _0x5af209.kind === 'rate') {
       await applyKind(_0x39fcba, _0x5af209.kind);
@@ -762,28 +733,26 @@ async function handle(_0x3ceaeb, _0x26c461) {
       
       if (_0x41951a) continue;
       
-      return sendUpstream(_0x3ceaeb, _0x26c461, _0x5af209, null);
+      return sendUpstream(_0x3ceaeb, res, _0x5af209, null);
     }
     
     return (
       markOk(_0x39fcba),
-      sendUpstream(_0x3ceaeb, _0x26c461, _0x5af209, _0x56dcfa)
+      sendUpstream(_0x3ceaeb, res, _0x5af209, _0x56dcfa)
     )
   }
   
-  if (_0x761e44) return sendUpstream(_0x3ceaeb, _0x26c461, _0x761e44, null);
+  if (_0x761e44) return sendUpstream(_0x3ceaeb, res, _0x761e44, null);
   
-  return sendBusy(_0x26c461);
+  return sendBusy(res);
 }
 
 const requestListener = (_0x2c62ec, res) => {  
-  handle(_0x2c62ec, res).catch(_0x12af1a => {
-    console.error('[handle]', _0x12af1a && _0x12af1a.message);
+  handle(_0x2c62ec, res).catch(error => {
+    console.error('[handle]', error && error.message);
     
     if (!res.headersSent) sendText(res, 502, 'Proxy Error');
-    else try {
-      res.destroy();
-    } catch (_0x38f7d2) {}
+    else res.destroy();
   });
 };
 
@@ -807,10 +776,7 @@ if (require.main === module) {
   server.listen(PORT, '0.0.0.0', () => {
     console.log('[proxy] listening on :' + PORT + ' / workers=' + workers.length + ' / reset=UTC ' + RESET_OFFSET / 3600000 + ':00 (日本時間 ' + RESET_OFFSET / 3600000 + 9 % 24 + ':00)');
   });
-  server.on('clientError', (_0x3af7ba, _0x11de11) => {
-    try {
-      _0x11de11.destroy();
-    } catch (_0xf7d33a) {}});
+  server.on('clientError', (_0x3af7ba, _0x11de11) => _0x11de11.destroy(); );
   
   const stop = () => {    
     server.close(() => process.exit(0));
