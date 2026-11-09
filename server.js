@@ -4,10 +4,10 @@ const http = require('http');
 const https = require('https');
 const { URL } = require('url');
 const env = process.env;
-const num = (_0x47b474, _0x2cdef1) => {  
-  const _0x5cff89 = Number(_0x47b474);
+const num = (num1, num2) => {
+  const formatNum1 = Number(num1);
   
-  return Number.isFinite(_0x5cff89) ? _0x5cff89 : _0x2cdef1;
+  return Number.isFinite(formatNum1) ? formatNum1 : num2;
 };
 
 const DEFAULT_WORKERS = ['https://api-tool.nemu0001.workers.dev/', 'https://api-tool.nemu01.workers.dev', 'https://api-tool.myproxy0109.workers.dev', 'https://api-tool.myproxy0109.workers.dev/'];
@@ -28,10 +28,10 @@ const rawList = env.CF_WORKER_URLS && env.CF_WORKER_URLS.trim() ? env.CF_WORKER_
 const RESET_OFFSET = (num(env.RESET_UTC_HOUR, 0) % 24 + 24) % 24 * 3600000;
 const utcDay = () => Math.floor((Date.now() - RESET_OFFSET) / 86400000);
 const nextUtcMidnight = () => (utcDay() + 1) * 86400000 + RESET_OFFSET;
-const jst = _0x56a41e => new Date(_0x56a41e + 9 * 3600000).toISOString().replace('T',' ').slice(0, 16) + JST;
+const jst = blockedUntil => new Date(blockedUntil + 9 * 3600000).toISOString().replace('T',' ').slice(0, 16) + JST;
 const workers = [];
 
-for (const s of rawList.split(/[ ,]+/).map(_0x4eae20 => _0x4eae20.trim().replace(/\/+$/,'')).filter(Boolean)) {
+for (const s of rawList.split(/[ ,]+/).map(raw => raw.trim().replace(/\/+$/,'')).filter(Boolean)) {
   try {
     const u = new URL(s);
     
@@ -51,64 +51,64 @@ for (const s of rawList.split(/[ ,]+/).map(_0x4eae20 => _0x4eae20.trim().replace
   }
 }
 
-function rollover(_0x3ec273) {
-  const _0x45b7dc = utcDay();
+function rollover(workers) {
+  const today = utcDay();
   
-  if (_0x3ec273.day !== _0x45b7dc) {
-    _0x3ec273.day = _0x45b7dc;
-    _0x3ec273.used = 0;
+  if (workers.day !== today) {
+    workers.day = today;
+    workers.used = 0;
     
-    if (_0x3ec273.reason === 'quota') {
-      _0x3ec273.blockedUntil = 0;
-      _0x3ec273.reason = '';
-      _0x3ec273.fails = 0;
+    if (workers.reason === 'quota') {
+      workers.blockedUntil = 0;
+      workers.reason = '';
+      workers.fails = 0;
     }
   };
 }
 
-function block(_0x3c7f7c, _0x15f983, _0x59b646) {
-  _0x3c7f7c.blockedUntil = Date.now() + _0x15f983;
-  _0x3c7f7c.reason = _0x59b646;
+function block(workers, duration, reason) {
+  workers.blockedUntil = Date.now() + duration;
+  workers.reason = reason;
   
-  console.log(`[worker#${_0x3c7f7c.id}] 停止${_0x59b646}\ →\ ${new Date(_0x3c7f7c.blockedUntil).toISOString()} (${jst(_0x3c7f7c.blockedUntil)})`);
+  console.log(`[worker#${workers.id}] 停止${reason}\ →\ ${new Date(workers.blockedUntil).toISOString()} (${jst(workers.blockedUntil)})`);
 }
 
-function markOk(_0x76f179) {
-  _0x76f179.fails = 0;
+function markOk(workers) {
+  workers.fails = 0;
 }
 
-function markFail(_0x246637, _0x1b6590) {
-  _0x246637.fails++;
+function markFail(workers, reason) {
+  workers.fails++;
   
-  if (_0x246637.fails >= 2) block(_0x246637, Math.min(15000 * Math.pow(2, _0x246637.fails - 2), 300000), _0x1b6590);
+  if (workers.fails >= 2) block(workers, Math.min(15000 * Math.pow(2, workers.fails - 2), 300000), reason);
 }
 
-async function applyKind(_0x24bc09, _0xf3df15) {
-  if (_0xf3df15 === 'quota') {
-    block(_0x24bc09, nextUtcMidnight() - Date.now() + 30000, 'quota');
-    _0x24bc09.fails = 0;
-    await shareBlock(_0x24bc09);
+async function applyKind(workers, reason) {
+  if (reason === 'quota') {
+    block(workers, nextUtcMidnight() - Date.now() + 30000, 'quota');
+    workers.fails = 0;
+    await shareBlock(workers);
   } else {
-    if (_0xf3df15 === 'rate') {
-      block(_0x24bc09, 60000, 'rate');
-      await shareBlock(_0x24bc09);
+    if (reason === 'rate') {
+      block(workers, 60000, 'rate');
+      await shareBlock(workers);
     } else {
-      if (_0xf3df15 === 'workererr') {
-        markFail(_0x24bc09, 'worker-error');
+      if (reason === 'workererr') {
+        markFail(workers, 'worker-error');
       }
     }
   }
 }
 
-function pick(_0x559529) {  
-  const _0x6d8fa5 = Date.now();
+function pick(_0x559529) {
+  const now = Date.now();
   const _0x11bdf5 = [];
   
   for (const _0x18b637 of workers) {
     rollover(_0x18b637);
     
     if (_0x559529 && _0x559529.has(_0x18b637.id)) continue;
-    if (_0x18b637.blockedUntil > _0x6d8fa5) continue;
+    if (_0x18b637.blockedUntil > now) continue;
     
     _0x11bdf5.push(_0x18b637);
   }
@@ -123,15 +123,15 @@ function pick(_0x559529) {
 }
 
 function soonestRetrySec() {
-  const _0x5179a4 = Date.now();
-  let _0x2a4ea5 = Infinity;
+  const now = Date.now();
+  let minTime = Infinity;
   
-  for (const _0x58005c of workers){
-    if (_0x58005c.blockedUntil > _0x5179a4) {
-      _0x2a4ea5 = Math.min(_0x2a4ea5, _0x58005c.blockedUntil - _0x5179a4);
+  for (const worker of workers){
+    if (worker.blockedUntil > now) {
+      minTime = Math.min(minTime, worker.blockedUntil - now);
     }
   
-    return Number.isFinite(_0x2a4ea5) ? Math.max(1, Math.min(3600, Math.ceil(_0x2a4ea5 / 1000))) : 30;
+    return Number.isFinite(minTime) ? Math.max(1, Math.min(3600, Math.ceil(minTime / 1000))) : 30;
   }
 }
 
@@ -139,7 +139,7 @@ const QUOTA_RE =/error *code:? *1027|error *1027|daily request limit|exceeded[^.
 const RATE_RE = /error *code:? *1015|error *1015|you are being rate limited/i;
 const WERR_RE = /error *code:? *110[12]|error *110[12]|worker threw exception|exceeded resource limits/i;
 
-function classify(_0x4beeb3, _0x4295ef) {  
+function classify(_0x4beeb3, _0x4295ef) {
   if (!PEEK_STATUS.has(_0x4beeb3)) return null;
   
   const _0x5d8a5a = _0x4295ef.toString('utf8', 0, 4096);
@@ -151,36 +151,36 @@ function classify(_0x4beeb3, _0x4295ef) {
   return null;
 }
 
-const shareKey = _0x456ea4 => 'wproxy:block:' + _0x456ea4.url.host;
+const shareKey = workers => 'wproxy:block:' + workers.url.host;
 
-async function rest(_0x1354b4) {  
+async function rest(path) {  
   if (!REDIS_URL) return null;
   
   try {
-    const _0x4a4c3f = new AbortController();
-    const _0x10eaea = setTimeout(() => _0x4a4c3f.abort(), 1500);
-    const _0x131c34 = await fetch(REDIS_URL + _0x1354b4, {
+    const controller = new AbortController();
+    const interruptTimer = setTimeout(() => controller.abort(), 1500);
+    const response = await fetch(REDIS_URL + path, {
       'headers': {
         'Authorization': 'Bearer' + REDIS_TOKEN
       },
-      'signal': _0x4a4c3f.signal
+      'signal': controller.signal
     });
     
     return (
-      clearTimeout(_0x10eaea),
-      await _0x131c34.json()
+      clearTimeout(interruptTimer),
+      await response.json()
     )
   } catch (error) {
     return null;
   }
 }
 
-async function shareBlock(_0x2308cd) {
+async function shareBlock(workers) {
   if (!REDIS_URL) return;
   
-  const _0x297605 = Math.max(1, Math.ceil((_0x2308cd.blockedUntil - Date.now()) / 1000));
+  const time = Math.max(1, Math.ceil((workers.blockedUntil - Date.now()) / 1000));
   
-  await rest('/set/' + encodeURIComponent(shareKey(_0x2308cd)) + '/' + _0x2308cd.blockedUntil + '/EX/' + _0x297605);
+  await rest('/set/' + encodeURIComponent(shareKey(workers)) + '/' + workers.blockedUntil + '/EX/' + time);
 }
 
 let lastSync = 0;
@@ -190,7 +190,7 @@ async function syncShared() {
   
   lastSync = Date.now();
   
-  const _0xb41bec = await rest('/mget/' + workers.map(_0x35f725 => encodeURIComponent(shareKey(_0x35f725))).join('/'));
+  const _0xb41bec = await rest('/mget/' + workers.map(worker => encodeURIComponent(shareKey(worker))).join('/'));
   
   if (!_0xb41bec || !Array.isArray(_0xb41bec.result)) return;
   
@@ -640,7 +640,7 @@ async function handle(req, res) {
   
   if (!workers.length) return sendText(res, 500, 'No worker configured');
   
-  const _0x41951a = /^(GET|HEAD|OPTIONS)$/.test(req.method);
+  const isMethod = /^(GET|HEAD|OPTIONS)$/.test(req.method);
   let _0x56dcfa = null;
   
   if (CACHE_ON && req.method === 'GET' && !req.headers.range && !req.headers.authorization) {
@@ -659,7 +659,7 @@ async function handle(req, res) {
   
   let _0x5cbec1 = Buffer.alloc(0);
   
-  if (!_0x41951a || req.method === 'OPTIONS') {
+  if (!isMethod || req.method === 'OPTIONS') {
    try {
       _0x5cbec1 = await readBody(req, MAX_BODY);
     } catch (error) {
@@ -689,7 +689,7 @@ async function handle(req, res) {
   const _0x16678a = new Set();
   let _0x761e44 = null;
   
-  for (let _0x5dec01 = 0; _0x5dec01 < MAX_ATTEMPTS; _0x5dec01++) {
+  for (let i = 0; i < MAX_ATTEMPTS; i++) {
     if (_0x1195a8.dead) return;
     
     const _0x39fcba = pick(_0x16678a);
@@ -712,7 +712,7 @@ async function handle(req, res) {
     if (_0x5af209.error) {
       markFail(_0x39fcba, _0x5af209.error);
       
-      if (_0x41951a || SAFE_ERR.has(_0x5af209.error)) continue;
+      if (isMethod || SAFE_ERR.has(_0x5af209.error)) continue;
       
       return sendText(res, 502, 'Proxy Error');
     }
@@ -727,7 +727,7 @@ async function handle(req, res) {
       
       _0x761e44 = _0x5af209;
       
-      if (_0x41951a) continue;
+      if (isMethod) continue;
       
       return sendUpstream(req, res, _0x5af209, null);
     }
