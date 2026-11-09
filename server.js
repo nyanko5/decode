@@ -544,27 +544,27 @@ function serveCached(_0x1cd095, _0x5ed84d, _0x2be3ad) {
   _0x5ed84d.end(_0x1cd095.method === 'HEAD' ? undefined : _0x2be3ad.body);
 }
 
-function readBody(_0x1468fe, _0x2ec702) {  
-  return new Promise((_0x22aa4f, _0x32edfe) => {    
-    const _0x3d9c19 = [];
-    let _0x187320 = 0;
-    let _0x79b269 = false;
+function readBody(req, MAX_BODY) {
+  return new Promise((resolve, reject) => {    
+    const reqData = [];
+    let dataTotalLength = 0;
+    let isOver = false;
     
-    _0x1468fe.on('data', _0x1f2459 => {        
-      if (_0x79b269) return;
+    req.on('data', data => {        
+      if (isOver) return;
       
-      _0x187320 += _0x1f2459.length;
+      dataTotalLength += data.length;
       
-      if (_0x187320 > _0x2ec702) {
-        _0x79b269 = true;
-        _0x3d9c19.length = 0;
-      } else _0x3d9c19.push(_0x1f2459);
+      if (dataTotalLength > MAX_BODY) {
+        isOver = true;
+        reqData.length = 0;
+      } else reqData.push(data);
     });
-    _0x1468fe.on('end', () => _0x79b269 ? _0x32edfe(Object.assign(new Error('too large'), {
+    req.on('end', () => isOver ? reject(Object.assign(new Error('too large'), {
       'code': 'E2BIG'
-    })) : _0x22aa4f(Buffer.concat(_0x3d9c19)));
-    _0x1468fe.on('error', _0x32edfe);
-    _0x1468fe.on('aborted', () => _0x32edfe(new Error('aborted')));
+    })) : resolve(Buffer.concat(reqData)));
+    req.on('error', reject);
+    req.on('aborted', () => reject(new Error('aborted')));
   });
 }
 
@@ -586,30 +586,30 @@ async function handle(req, res) {
   
   if (url.startsWith('/_proxy/status')) {
     if (env.STATUS_TOKEN) {
-      let _0x5399f3 = '';
+      let url = '';
       
       try {
-        _0x5399f3 = new URL(url, 'http://x').searchParams.get('token') || '';
+        url = new URL(url, 'http://x').searchParams.get('token') || '';
       } catch (error) {}
-      if (_0x5399f3 !== env.STATUS_TOKEN) return sendText(res, 403, 'forbidden');
+      if (url !== env.STATUS_TOKEN) return sendText(res, 403, 'forbidden');
     }
     
     await syncShared();
     
-    const _0x2003fb = Date.now();
-    const _0x2410f4 = {
+    const now = Date.now();
+    const option = {
       'note': 'このインスタンスから見た状態です（Vercel はインスタンスが複数あります）',
       'time': new Date().toISOString(),
       'timeJST': jst(Date.now()),
       'sharedState': REDIS_URL ? 'redis' : 'none',
-      'workers': workers.map(_0x23e62a => ({
-        'id': _0x23e62a.id,
-        'host': _0x23e62a.url.host.replace(/^(.{4}).*(.{12})$/, '$1…$2'),
-        'usedOnThisInstance': _0x23e62a.used,
-        'state': _0x23e62a.blockedUntil > _0x2003fb ? 'blocked(' + _0x23e62a.reason + ')' : 'ok',
-        'blockedUntil': _0x23e62a.blockedUntil > _0x2003fb ? new Date(_0x23e62a.blockedUntil).toISOString() : null,
-        'blockedUntilJST': _0x23e62a.blockedUntil > _0x2003fb ? jst(_0x23e62a.blockedUntil) : null,
-        'consecutiveFails' : _0x23e62a.fails
+      'workers': workers.map(worker => ({
+        'id': worker.id,
+        'host': worker.url.host.replace(/^(.{4}).*(.{12})$/, '$1…$2'),
+        'usedOnThisInstance': worker.used,
+        'state': worker.blockedUntil > now ? 'blocked(' + worker.reason + ')' : 'ok',
+        'blockedUntil': worker.blockedUntil > now ? new Date(worker.blockedUntil).toISOString() : null,
+        'blockedUntilJST': worker.blockedUntil > now ? jst(worker.blockedUntil) : null,
+        'consecutiveFails' : worker.fails
       })),
       'cache': {
         'items': cache.size,
@@ -618,15 +618,15 @@ async function handle(req, res) {
         'misses': cacheMiss
       }
     };
-    const _0x55772c = Buffer.from(JSON.stringify(_0x2410f4, null, 2));
+    const buf = Buffer.from(JSON.stringify(option, null, 2));
     
     return (
       res.writeHead(200, {
       'content-type': 'application/json; charset=utf-8',
-      'content-length': String(_0x55772c.length),
+      'content-length': String(buf.length),
       'cache-control': 'no-store'
     }),
-      res.end(_0x55772c)
+      res.end(buf)
     )
   }
   
