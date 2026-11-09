@@ -51,17 +51,17 @@ for (const s of rawList.split(/[ ,]+/).map(raw => raw.trim().replace(/\/+$/,''))
   }
 }
 
-function rollover(workers) {
+function rollover(worker) {
   const today = utcDay();
   
-  if (workers.day !== today) {
-    workers.day = today;
-    workers.used = 0;
+  if (worker.day !== today) {
+    worker.day = today;
+    worker.used = 0;
     
-    if (workers.reason === 'quota') {
-      workers.blockedUntil = 0;
-      workers.reason = '';
-      workers.fails = 0;
+    if (worker.reason === 'quota') {
+      worker.blockedUntil = 0;
+      worker.reason = '';
+      worker.fails = 0;
     }
   };
 }
@@ -104,13 +104,13 @@ function pick(_0x559529) {
   const now = Date.now();
   const _0x11bdf5 = [];
   
-  for (const _0x18b637 of workers) {
-    rollover(_0x18b637);
+  for (const worker of workers) {
+    rollover(worker);
     
-    if (_0x559529 && _0x559529.has(_0x18b637.id)) continue;
-    if (_0x18b637.blockedUntil > now) continue;
+    if (_0x559529 && _0x559529.has(worker.id)) continue;
+    if (worker.blockedUntil > now) continue;
     
-    _0x11bdf5.push(_0x18b637);
+    _0x11bdf5.push(worker);
   }
   
   if (!_0x11bdf5.length) return null;
