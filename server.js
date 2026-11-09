@@ -568,14 +568,14 @@ function readBody(_0x1468fe, _0x2ec702) {
   });
 }
 
-async function handle(_0x3ceaeb, res) {
-  const _0x24411b = _0x3ceaeb.url || '/';
+async function handle(req, res) {
+  const url = req.url || '/';
    
-  if (_0x24411b === '/_proxy/health' || _0x24411b === '/_render/health') return sendText(res, 200, 'ok');
-  if (_0x24411b === '/robots.txt') return sendText(res, 200, 'User-agent: *\nDisallow: /\n', {
+  if (url === '/_proxy/health' || url === '/_render/health') return sendText(res, 200, 'ok');
+  if (url === '/robots.txt') return sendText(res, 200, 'User-agent: *\nDisallow: /\n', {
     'cache-control': 'public,\x20max-age=86400'
   });
-  if (/^\/apple-touch-icon(-precomposed|-\d+x\d+)*\.png(\?|$)/['test'](_0x24411b)) {
+  if (/^\/apple-touch-icon(-precomposed|-\d+x\d+)*\.png(\?|$)/['test'](url)) {
     return (
       res.writeHead(204, {
         'cache-control': 'public, max-age=86400'
@@ -584,12 +584,12 @@ async function handle(_0x3ceaeb, res) {
     );
   }
   
-  if (_0x24411b.startsWith('/_proxy/status')) {
+  if (url.startsWith('/_proxy/status')) {
     if (env.STATUS_TOKEN) {
       let _0x5399f3 = '';
       
       try {
-        _0x5399f3 = new URL(_0x24411b, 'http://x').searchParams.get('token') || '';
+        _0x5399f3 = new URL(url, 'http://x').searchParams.get('token') || '';
       } catch (error) {}
       if (_0x5399f3 !== env.STATUS_TOKEN) return sendText(res, 403, 'forbidden');
     }
@@ -630,8 +630,8 @@ async function handle(_0x3ceaeb, res) {
     )
   }
   
-  if (_0x24411b[0] !== '/') return sendText(res, 400, 'bad request');
-  if (_0x24411b === '/favicon.ico' && String(env.FAVICON).toLowerCase() !== 'proxy') {
+  if (url[0] !== '/') return sendText(res, 400, 'bad request');
+  if (url === '/favicon.ico' && String(env.FAVICON).toLowerCase() !== 'proxy') {
     return (
       res.writeHead(204),
       res.end()
@@ -640,17 +640,17 @@ async function handle(_0x3ceaeb, res) {
   
   if (!workers.length) return sendText(res, 500, 'No worker configured');
   
-  const _0x41951a = /^(GET|HEAD|OPTIONS)$/.test(_0x3ceaeb.method);
+  const _0x41951a = /^(GET|HEAD|OPTIONS)$/.test(req.method);
   let _0x56dcfa = null;
   
-  if (CACHE_ON && _0x3ceaeb.method === 'GET' && !_0x3ceaeb.headers.range && !_0x3ceaeb.headers.authorization) {
-    _0x56dcfa = publicHost(_0x3ceaeb) + '|' + cookieOf(_0x3ceaeb.headers.cookie, 'gw_site') + '|' + (_0x3ceaeb.headers['accept-encoding'] || '') + '|' + _0x24411b;
+  if (CACHE_ON && req.method === 'GET' && !req.headers.range && !req.headers.authorization) {
+    _0x56dcfa = publicHost(req) + '|' + cookieOf(req.headers.cookie, 'gw_site') + '|' + (req.headers['accept-encoding'] || '') + '|' + url;
     const _0x122e20 = cacheGet(_0x56dcfa);
     
     if (_0x122e20) {
       return (
         cacheHits++,
-        serveCached(_0x3ceaeb, res, _0x122e20)
+        serveCached(req, res, _0x122e20)
       )
     }
     
@@ -659,18 +659,18 @@ async function handle(_0x3ceaeb, res) {
   
   let _0x5cbec1 = Buffer.alloc(0);
   
-  if (!_0x41951a || _0x3ceaeb.method === 'OPTIONS') {
+  if (!_0x41951a || req.method === 'OPTIONS') {
    try {
-      _0x5cbec1 = await readBody(_0x3ceaeb, MAX_BODY);
+      _0x5cbec1 = await readBody(req, MAX_BODY);
     } catch (error) {
       return sendText(res, error.code === 'E2BIG' ? 413 : 400, error.code === 'E2BIG' ? 'payload too large' : 'bad request');
     }
   }
   
   const _0x1195a8 = {
-    'method': _0x3ceaeb.method,
-    'path': _0x24411b,
-    'headers': buildHeaders(_0x3ceaeb, _0x5cbec1.length),
+    'method': req.method,
+    'path': url,
+    'headers': buildHeaders(req, _0x5cbec1.length),
     'body': _0x5cbec1,
     'cancel': null,
     'dead': false
@@ -729,22 +729,22 @@ async function handle(_0x3ceaeb, res) {
       
       if (_0x41951a) continue;
       
-      return sendUpstream(_0x3ceaeb, res, _0x5af209, null);
+      return sendUpstream(req, res, _0x5af209, null);
     }
     
     return (
       markOk(_0x39fcba),
-      sendUpstream(_0x3ceaeb, res, _0x5af209, _0x56dcfa)
+      sendUpstream(req, res, _0x5af209, _0x56dcfa)
     )
   }
   
-  if (_0x761e44) return sendUpstream(_0x3ceaeb, res, _0x761e44, null);
+  if (_0x761e44) return sendUpstream(req, res, _0x761e44, null);
   
   return sendBusy(res);
 }
 
-const requestListener = (_0x2c62ec, res) => {  
-  handle(_0x2c62ec, res).catch(error => {
+const requestListener = (req, res) => {  
+  handle(req, res).catch(error => {
     console.error('[handle]', error && error.message);
     
     if (!res.headersSent) sendText(res, 502, 'Proxy Error');
@@ -781,8 +781,8 @@ if (require.main === module) {
   
   process.on('SIGTERM', stop);
   process.on('SIGINT', stop);
-  process.on('unhandledRejection', _0xa2a9ec => console.error('[unhandledRejection]', _0xa2a9ec && _0xa2a9ec.message));
-  process.on('uncaughtException', _0x258272 => console.error('[uncaughtException]', _0x258272 && _0x258272.message));
+  process.on('unhandledRejection', error => console.error('[unhandledRejection]', error && error.message));
+  process.on('uncaughtException', error => console.error('[uncaughtException]', error && error.message));
   env.KEEP_ALIVE === '1' && env.RENDER_EXTERNAL_URL && setInterval(() => {    
     https.get(env.RENDER_EXTERNAL_URL.replace(/\/+$/,'') + '/_proxy/health', _0x2791b1 => _0x2791b1.resume()).on('error', () => {});
   }, 10 * 60 * 1000).unref();
