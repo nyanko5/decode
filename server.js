@@ -139,14 +139,14 @@ const QUOTA_RE =/error *code:? *1027|error *1027|daily request limit|exceeded[^.
 const RATE_RE = /error *code:? *1015|error *1015|you are being rate limited/i;
 const WERR_RE = /error *code:? *110[12]|error *110[12]|worker threw exception|exceeded resource limits/i;
 
-function classify(_0x4beeb3, _0x4295ef) {
-  if (!PEEK_STATUS.has(_0x4beeb3)) return null;
+function classify(statusCode, buf) {
+  if (!PEEK_STATUS.has(statusCode)) return null;
   
-  const _0x5d8a5a = _0x4295ef.toString('utf8', 0, 4096);
+  const reason = buf.toString('utf8', 0, 4096);
   
-  if (QUOTA_RE.test(_0x5d8a5a)) return 'quota';
-  if (RATE_RE.test(_0x5d8a5a)) return 'rate';
-  if (WERR_RE.test(_0x5d8a5a)) return 'workererr';
+  if (QUOTA_RE.test(reason)) return 'quota';
+  if (RATE_RE.test(reason)) return 'rate';
+  if (WERR_RE.test(reason)) return 'workererr';
   
   return null;
 }
@@ -307,70 +307,70 @@ const httpAgent = new http.Agent({
   'scheduling': 'lifo'
 });
 
-function attempt(_0x4b9a72, _0x1f4728) {
+function attempt(newWorkers, options) {
   return new Promise(resolve => {
-    const _0x349671 = _0x4b9a72.url.protocol === 'http:';
-    let _0x3d2a1d = false;
-    let _0xb53ec0 = null;
-    const _0x13ef3e = _0xfe12af => {
-        if (!_0x3d2a1d) {
-          _0x3d2a1d = true;
-          clearTimeout(_0xb53ec0);
-          resolve(_0xfe12af);
+    const isHttp = newWorkers.url.protocol === 'http:';
+    let isTimer = false;
+    let timer = null;
+    const clearTimerRes = resOption => {
+        if (!isTimer) {
+          isTimer = true;
+          clearTimeout(timer);
+          resolve(resOption);
         }
     };
-    const req = (_0x349671 ? http : https).request(
+    const req = (isHttp ? http : https).request(
       {
-        'hostname': _0x4b9a72.url.hostname,
-        'port': _0x4b9a72.url.port || (_0x349671 ? 80 : 443),
-        'path': _0x1f4728.path,
-        'method': _0x1f4728.method,
-        'headers': Object.assign({}, _0x1f4728.headers, {
-          'host': _0x4b9a72.url.host
+        'hostname': newWorkers.url.hostname,
+        'port': newWorkers.url.port || (isHttp ? 80 : 443),
+        'path': options.path,
+        'method': options.method,
+        'headers': Object.assign({}, options.headers, {
+          'host': newWorkers.url.host
         }),
-        'agent': _0x349671 ? httpAgent : httpsAgent
+        'agent': isHttp ? httpAgent : httpsAgent
       },
       res => {
-        clearTimeout(_0xb53ec0);
-        const _0x490f3c = res.statusCode;
-        const _0x19af27 = Number(res.headers['content-length']);
+        clearTimeout(timer);
+        const statusCode = res.statusCode;
+        const resContentLength = Number(res.headers['content-length']);
         
-        if (PEEK_STATUS.has(_0x490f3c) && Number.isFinite(_0x19af27) && _0x19af27 <= PEEK_MAX) {
-          const _0x6273eb = [];
-          res.on('data', chunk => _0x6273eb.push(chunk));
+        if (PEEK_STATUS.has(statusCode) && Number.isFinite(resContentLength) && resContentLength <= PEEK_MAX) {
+          const chunks = [];
+          res.on('data', chunk => chunks.push(chunk));
           res.on('end', () => {
-            const _0x4cd5c0 = Buffer.concat(_0x6273eb);
-            _0x13ef3e({
+            const buf = Buffer.concat(chunks);
+            clearTimerRes({
               'upRes': res,
-              'body': _0x4cd5c0,
-              'kind': classify(_0x490f3c, _0x4cd5c0)
+              'body': buf,
+              'kind': classify(statusCode, buf)
             });
           });
-          res.on('error', () => _0x13ef3e({
+          res.on('error', () => clearTimerRes({
             'error': 'ECONNRESET'
           }));
           
           return;
         }
         
-        _0x13ef3e({
+        clearTimerRes({
           'upRes': res
         });
       }
     );
     
-    _0xb53ec0 = setTimeout(() => {      
+    timer = setTimeout(() => {      
       req.destroy(Object.assign(new Error('header timeout'), {
         'code': 'EHDRTIMEOUT'
       }));
     } , HEADER_TIMEOUT);
-    req.on('error', error => _0x13ef3e({
+    req.on('error', error => clearTimerRes({
       'error': error && error.code || 'ERROR'
     }));
-    _0x1f4728.cancel = () => req.destroy();
+    options.cancel = () => req.destroy();
     
-    if (_0x1f4728.body && _0x1f4728.body.length) {
-      req.end(_0x1f4728.body);
+    if (options.body && options.body.length) {
+      req.end(options.body);
     } else req.end();
   });
 }
@@ -667,7 +667,7 @@ async function handle(req, res) {
     }
   }
   
-  const _0x1195a8 = {
+  const options = {
     'method': req.method,
     'path': url,
     'headers': buildHeaders(req, _0x5cbec1.length),
@@ -678,9 +678,9 @@ async function handle(req, res) {
   
   res.on('close', () => {    
     if (!res.writableEnded) {
-      _0x1195a8.dead = true;
+      options.dead = true;
       
-      if (_0x1195a8.cancel) _0x1195a8.cancel();
+      if (options.cancel) options.cancel();
     }
   });
   
@@ -690,7 +690,7 @@ async function handle(req, res) {
   let _0x761e44 = null;
   
   for (let i = 0; i < MAX_ATTEMPTS; i++) {
-    if (_0x1195a8.dead) return;
+    if (options.dead) return;
     
     const newWorkers = pick(set);
     
@@ -699,9 +699,9 @@ async function handle(req, res) {
     set.add(newWorkers.id);
     newWorkers.used++;
     
-    const _0x5af209 = await attempt(newWorkers, _0x1195a8);
+    const _0x5af209 = await attempt(newWorkers, options);
     
-    if (_0x1195a8.dead) {
+    if (options.dead) {
       if (_0x5af209.upRes) {
         _0x5af209.upRes.destroy();
       }
