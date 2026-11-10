@@ -699,42 +699,42 @@ async function handle(req, res) {
     set.add(newWorkers.id);
     newWorkers.used++;
     
-    const _0x5af209 = await attempt(newWorkers, options);
+    const resOptions = await attempt(newWorkers, options);
     
     if (options.dead) {
-      if (_0x5af209.upRes) {
-        _0x5af209.upRes.destroy();
+      if (resOptions.upRes) {
+        resOptions.upRes.destroy();
       }
       
       return;
     }
     
-    if (_0x5af209.error) {
-      markFail(newWorkers, _0x5af209.error);
+    if (resOptions.error) {
+      markFail(newWorkers, resOptions.error);
       
-      if (isMethod || SAFE_ERR.has(_0x5af209.error)) continue;
+      if (isMethod || SAFE_ERR.has(resOptions.error)) continue;
       
       return sendText(res, 502, 'Proxy Error');
     }
-    if (_0x5af209.kind === 'quota' || _0x5af209.kind === 'rate') {
-      await applyKind(newWorkers, _0x5af209.kind);
+    if (resOptions.kind === 'quota' || resOptions.kind === 'rate') {
+      await applyKind(newWorkers, resOptions.kind);
       
       continue;
     }
     
-    if (_0x5af209.kind === 'workererr') {
-      await applyKind(newWorkers, _0x5af209.kind);
+    if (resOptions.kind === 'workererr') {
+      await applyKind(newWorkers, resOptions.kind);
       
-      _0x761e44 = _0x5af209;
+      _0x761e44 = resOptions;
       
       if (isMethod) continue;
       
-      return sendUpstream(req, res, _0x5af209, null);
+      return sendUpstream(req, res, resOptions, null);
     }
     
     return (
       markOk(newWorkers),
-      sendUpstream(req, res, _0x5af209, _0x56dcfa)
+      sendUpstream(req, res, resOptions, _0x56dcfa)
     )
   }
   
