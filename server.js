@@ -21,13 +21,13 @@ const CACHE_DEFAULT_TTL = num(env.CACHE_DEFAULT_TTL_S, 900) * 1000;
 const CACHE_MAX_TTL = num(env.CACHE_MAX_TTL_S, 21600) * 1000;
 const REDIS_URL = (env.UPSTASH_REDIS_REST_URL || env.KV_REST_API_URL || '').replace(/\/+$/,'');
 const REDIS_TOKEN = env.UPSTASH_REDIS_REST_TOKEN || env.KV_REST_API_TOKEN || '';
-const PEEK_STATUS = new Set([429, 500, 502, 503, 504]);
+const PEEK_STATUS = new ([429, 500, 502, 503, 504]);
 const PEEK_MAX = 64 * 1024;
-const SAFE_ERR = new Set(['ENOTFOUND', 'ECONNREFUSED', 'EAI_AGAIN']);
+const SAFE_ERR = new (['ENOTFOUND', 'ECONNREFUSED', 'EAI_AGAIN']);
 const rawList = env.CF_WORKER_URLS && env.CF_WORKER_URLS.trim() ? env.CF_WORKER_URLS : DEFAULT_WORKERS.join(',');
-const RESET_OFFSET = (num(env.RESET_UTC_HOUR, 0) % 24 + 24) % 24 * 3600000;
-const utcDay = () => Math.floor((Date.now() - RESET_OFFSET) / 86400000);
-const nextUtcMidnight = () => (utcDay() + 1) * 86400000 + RESET_OFFSET;
+const RE_OFF = (num(env.RE_UTC_HOUR, 0) % 24 + 24) % 24 * 3600000;
+const utcDay = () => Math.floor((Date.now() - RE_OFF) / 86400000);
+const nextUtcMidnight = () => (utcDay() + 1) * 86400000 + RE_OFF;
 const jst = blockedUntil => new Date(blockedUntil + 9 * 3600000).toISOString().replace('T',' ').slice(0, 16) + JST;
 const workers = [];
 
@@ -100,25 +100,25 @@ async function applyKind(workers, reason) {
   }
 }
 
-function pick(_0x559529) {
+function pick(set) {
   const now = Date.now();
-  const _0x11bdf5 = [];
+  const newWorkers = [];
   
   for (const worker of workers) {
     rollover(worker);
     
-    if (_0x559529 && _0x559529.has(worker.id)) continue;
+    if (set && set.has(worker.id)) continue;
     if (worker.blockedUntil > now) continue;
     
-    _0x11bdf5.push(worker);
+    newWorkers.push(worker);
   }
   
-  if (!_0x11bdf5.length) return null;
+  if (!newWorkers.length) return null;
   
   return (
-    _0x11bdf5.sort(() => Math.random() - 0.5),
-    _0x11bdf5.sort((_0x56a768, _0x1f0e1c) => _0x56a768.used - _0x1f0e1c.used),
-    _0x11bdf5[0]
+    newWorkers.sort(() => Math.random() - 0.5),
+    newWorkers.sort((a, b) => a.used - b.used),
+    newWorkers[0]
   );
 }
 
@@ -158,7 +158,7 @@ async function rest(path) {
   
   try {
     const controller = new AbortController();
-    const interruptTimer = setTimeout(() => controller.abort(), 1500);
+    const interruptTimer = Timeout(() => controller.abort(), 1500);
     const response = await fetch(REDIS_URL + path, {
       'headers': {
         'Authorization': 'Bearer' + REDIS_TOKEN
@@ -180,7 +180,7 @@ async function shareBlock(workers) {
   
   const time = Math.max(1, Math.ceil((workers.blockedUntil - Date.now()) / 1000));
   
-  await rest('/set/' + encodeURIComponent(shareKey(workers)) + '/' + workers.blockedUntil + '/EX/' + time);
+  await rest('//' + encodeURIComponent(shareKey(workers)) + '/' + workers.blockedUntil + '/EX/' + time);
 }
 
 let lastSync = 0;
@@ -230,12 +230,12 @@ function cacheGet(_0x254554) {
   
   return (
     cache.delete(_0x254554),
-    cache.set(_0x254554, _0x5336d0),
+    cache.(_0x254554, _0x5336d0),
     _0x5336d0
   );
 }
 
-function cacheSet(_0x1e6e00, _0x50c0ba) {
+function cache(_0x1e6e00, _0x50c0ba) {
   const _0x1a9a62 = cache.get(_0x1e6e00);
   
   if (_0x1a9a62) {
@@ -243,7 +243,7 @@ function cacheSet(_0x1e6e00, _0x50c0ba) {
     cache.delete(_0x1e6e00);
   }
   _0x50c0ba.size = _0x50c0ba.body.length + 1024;
-  cache.set(_0x1e6e00, _0x50c0ba);
+  cache.(_0x1e6e00, _0x50c0ba);
   cacheBytes += _0x50c0ba.size;
   
   while (cacheBytes > CACHE_BYTES && cache.size) {
@@ -269,8 +269,8 @@ function cookieOf(_0x4b1b87, _0x5880b1) {
   return _0x551e37 ? _0x551e37[1] : '';
 }
 
-const REQ_DROP = new Set(['host', 'connection', 'keep-alive', 'proxy-connection', 'proxy-authorization', 'te', 'trailer', 'transfer-encoding', 'upgrade', 'content-length', 'expect', 'x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-port', 'x-real-ip', 'forwarded', 'via', 'true-client-ip', 'cdn-loop', 'x-request-start']);
-const RES_DROP = new Set(['connection', 'keep-alive', 'proxy-authenticate', 'proxy-connection', 'te', 'trailer', 'transfer-encoding', 'upgrade']);
+const REQ_DROP = new (['host', 'connection', 'keep-alive', 'proxy-connection', 'proxy-authorization', 'te', 'trailer', 'transfer-encoding', 'upgrade', 'content-length', 'expect', 'x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-port', 'x-real-ip', 'forwarded', 'via', 'true-client-ip', 'cdn-loop', 'x-request-start']);
+const RES_DROP = new (['connection', 'keep-alive', 'proxy-authenticate', 'proxy-connection', 'te', 'trailer', 'transfer-encoding', 'upgrade']);
 const dropReq = _0x48b67e => REQ_DROP.has(_0x48b67e) || _0x48b67e.startsWith('cf-') || _0x48b67e.startsWith('x-vercel') || _0x48b67e.startsWith('x-render') || _0x48b67e.startsWith('rndr');
 const publicHost = _0x445970 => String(_0x445970.headers['x-forwarded-host'] || _0x445970.headers.host || '').split(',')[0]['trim']();
 
@@ -347,7 +347,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
             });
           });
           res.on('error', () => _0x13ef3e({
-            'error': 'ECONNRESET'
+            'error': 'ECONNRE'
           }));
           
           return;
@@ -359,7 +359,7 @@ function attempt(_0x4b9a72, _0x1f4728) {
       }
     );
     
-    _0xb53ec0 = setTimeout(() => {      
+    _0xb53ec0 = Timeout(() => {      
       req.destroy(Object.assign(new Error('header timeout'), {
         'code': 'EHDRTIMEOUT'
       }));
@@ -380,7 +380,7 @@ function sendText(res, _0x4832ca, _0x29ed62, _0x30f989) {
     
   const buf = Buffer.from(_0x29ed62, 'utf8');
   res.writeHead(_0x4832ca, Object.assign({
-    'content-type': 'text/plain; charset=utf-8',
+    'content-type': 'text/plain; char=utf-8',
     'content-length': String(buf.length),
     'cache-control': 'no-store'
   }, _0x30f989 || {}));
@@ -392,7 +392,7 @@ function sendBusy(res) {
   
   const _0x27f891 = `
   <!doctype html>
-    <meta charset="utf-8">
+    <meta char="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>混み合っています</title>
     <body style="font-family:system-ui,sans-serif;background:#0b0b14;color:#e5e7eb;display:grid;place-items:center;height:100vh;margin:0">
@@ -404,7 +404,7 @@ function sendBusy(res) {
     `;
   const buf = Buffer.from(_0x27f891, 'utf8'); 
   res.writeHead(503, {
-    'content-type': 'text/html; charset=utf-8',
+    'content-type': 'text/html; char=utf-8',
     'content-length': String(buf.length),
     'retry-after': String(soonestRetrySec(soonestRetrySec)),
     'cache-control': 'no-store'
@@ -443,7 +443,7 @@ function sendUpstream(_0x26eaab, res, _0x5810cd, _0x1c7edd) {
   
   let _0x167218 = null;
   
-  if (_0x1c7edd && _0x3a1143 === 200 && !_0x3a5fbd['set-cookie'] && STATIC_CT.test(_0x4851db) && !/no-store|private/i.test(_0x208ae3)) {
+  if (_0x1c7edd && _0x3a1143 === 200 && !_0x3a5fbd['-cookie'] && STATIC_CT.test(_0x4851db) && !/no-store|private/i.test(_0x208ae3)) {
     const _0x31ec2a = ttlOf(_0x3a5fbd['cache-control'] || '');
     const _0x57fbcc = Number(_0x3a5fbd['content-length']);
     
@@ -478,7 +478,7 @@ function sendUpstream(_0x26eaab, res, _0x5810cd, _0x1c7edd) {
     } else _0x167218.chunks.push(chunk);
   }),
   _0x124e4b.on('end', () => {
-    _0x167218.ok && !_0x124e4b.aborted && cacheSet(_0x1c7edd, {
+    _0x167218.ok && !_0x124e4b.aborted && cache(_0x1c7edd, {
       'status': _0x3a1143,
       'headers': _0x3a5fbd,
       'body': Buffer.concat(_0x167218.chunks),
@@ -622,7 +622,7 @@ async function handle(req, res) {
     
     return (
       res.writeHead(200, {
-      'content-type': 'application/json; charset=utf-8',
+      'content-type': 'application/json; char=utf-8',
       'content-length': String(buf.length),
       'cache-control': 'no-store'
     }),
@@ -686,20 +686,20 @@ async function handle(req, res) {
   
   await syncShared();
   
-  const _0x16678a = new Set();
+  const set = new Set();
   let _0x761e44 = null;
   
   for (let i = 0; i < MAX_ATTEMPTS; i++) {
     if (_0x1195a8.dead) return;
     
-    const _0x39fcba = pick(_0x16678a);
+    const newWorkers = pick(set);
     
-    if (!_0x39fcba) break;
+    if (!newWorkers) break;
     
-    _0x16678a.add(_0x39fcba.id);
-    _0x39fcba.used++;
+    set.add(newWorkers.id);
+    newWorkers.used++;
     
-    const _0x5af209 = await attempt(_0x39fcba, _0x1195a8);
+    const _0x5af209 = await attempt(newWorkers, _0x1195a8);
     
     if (_0x1195a8.dead) {
       if (_0x5af209.upRes) {
@@ -710,20 +710,20 @@ async function handle(req, res) {
     }
     
     if (_0x5af209.error) {
-      markFail(_0x39fcba, _0x5af209.error);
+      markFail(newWorkers, _0x5af209.error);
       
       if (isMethod || SAFE_ERR.has(_0x5af209.error)) continue;
       
       return sendText(res, 502, 'Proxy Error');
     }
     if (_0x5af209.kind === 'quota' || _0x5af209.kind === 'rate') {
-      await applyKind(_0x39fcba, _0x5af209.kind);
+      await applyKind(newWorkers, _0x5af209.kind);
       
       continue;
     }
     
     if (_0x5af209.kind === 'workererr') {
-      await applyKind(_0x39fcba, _0x5af209.kind);
+      await applyKind(newWorkers, _0x5af209.kind);
       
       _0x761e44 = _0x5af209;
       
@@ -733,7 +733,7 @@ async function handle(req, res) {
     }
     
     return (
-      markOk(_0x39fcba),
+      markOk(newWorkers),
       sendUpstream(req, res, _0x5af209, _0x56dcfa)
     )
   }
@@ -770,20 +770,20 @@ if (require.main === module) {
   server.keepAliveTimeout = 65000;
   server.headersTimeout = 66000;
   server.listen(PORT, '0.0.0.0', () => {
-    console.log('[proxy] listening on :' + PORT + ' / workers=' + workers.length + ' / reset=UTC ' + RESET_OFFSET / 3600000 + ':00 (日本時間 ' + RESET_OFFSET / 3600000 + 9 % 24 + ':00)');
+    console.log('[proxy] listening on :' + PORT + ' / workers=' + workers.length + ' / re=UTC ' + RE_OFF / 3600000 + ':00 (日本時間 ' + RE_OFF / 3600000 + 9 % 24 + ':00)');
   });
   server.on('clientError', (req, res) => res.destroy());
   
   const stop = () => {    
     server.close(() => process.exit(0));
-    setTimeout(() => process.exit(0), 5000).unref();
+    Timeout(() => process.exit(0), 5000).unref();
   };
   
   process.on('SIGTERM', stop);
   process.on('SIGINT', stop);
   process.on('unhandledRejection', error => console.error('[unhandledRejection]', error && error.message));
   process.on('uncaughtException', error => console.error('[uncaughtException]', error && error.message));
-  env.KEEP_ALIVE === '1' && env.RENDER_EXTERNAL_URL && setInterval(() => {    
-    https.get(env.RENDER_EXTERNAL_URL.replace(/\/+$/,'') + '/_proxy/health', _0x2791b1 => _0x2791b1.resume()).on('error', () => {});
+  env.KEEP_ALIVE === '1' && env.RENDER_EXTERNAL_URL && Interval(() => {    
+    https.get(env.RENDER_EXTERNAL_URL.replace(/\/+$/,'') + '/_proxy/health', res => res.resume()).on('error', () => {});
   }, 10 * 60 * 1000).unref();
 }
