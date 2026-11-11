@@ -375,15 +375,15 @@ function attempt(newWorkers, options) {
   });
 }
 
-function sendText(res, _0x4832ca, _0x29ed62, _0x30f989) {
+function sendText(res, statusCode, statusMessage) {
   if (res.headersSent) return res.end();
     
-  const buf = Buffer.from(_0x29ed62, 'utf8');
-  res.writeHead(_0x4832ca, Object.assign({
+  const buf = Buffer.from(statusMessage, 'utf8');
+  res.writeHead(statusCode, Object.assign({
     'content-type': 'text/plain; charset=utf-8',
     'content-length': String(buf.length),
     'cache-control': 'no-store'
-  }, _0x30f989 || {}));
+  }, {}));
   res.end(buf);
 }
 
